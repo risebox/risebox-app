@@ -52,7 +52,27 @@ angular.module('risebox', ['ionic', 'risebox.controllers'])
     url: '/box',
     views: {
       'box-tab': {
-        templateUrl: 'templates/box.html'
+        templateUrl: 'templates/box/show.html'
+      }
+    }
+  })
+
+  .state('tabs.chemistry-status', {
+    url: '/chemistry/status',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/chemistry/status.html',
+        controller: 'ChemistryCtrl'
+      }
+    }
+  })
+
+  .state('tabs.chemistry-instructions', {
+    url: '/chemistry/instructions',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/chemistry/instructions.html',
+        controller: 'ChemistryCtrl'
       }
     }
   })
@@ -73,7 +93,9 @@ angular.module('risebox', ['ionic', 'risebox.controllers'])
         templateUrl: 'templates/shop.html'
       }
     }
-  });
+  })
+
+  ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/welcome');

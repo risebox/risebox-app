@@ -7,4 +7,10 @@ angular.module('risebox.controllers', [])
     $state.go('tabs.box');
   };
 
-});
+})
+
+.controller('ChemistryCtrl', function($scope, $state) {
+
+})
+
+;
