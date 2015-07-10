@@ -7,5 +7,6 @@
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
-  ]
+  ],
+  "app_id": "d49a75b8"
 }
