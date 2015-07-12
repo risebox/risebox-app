@@ -25,7 +25,12 @@
   ionic platform add android
   ```
 
-4. Build and run risebox-app on the simulators
+4. Build and run risebox-app
+  First try using Ionic view
+  ```
+  ionic serve --lab
+  ```
+  Then try using emulators
   ```
   ionic emulate android
   ionic emulate ios

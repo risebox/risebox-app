@@ -1,0 +1,27 @@
+<ion-view view-title="Connection">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Risebox ID</span>
+        <input type="text" ng-model="box.key">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Clé</span>
+        <input type="password" ng-model="box.token">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="registerDevice(box)">
+        Je connecte ma Risebox
+      </button>
+      <p class="text-center">
+        Les informations se trouvent à l'arrière du panneau d'accès à l'aquarium
+          cf image ci dessous
+      </p>
+    </div>
+  </ion-content>
+</ion-view>
