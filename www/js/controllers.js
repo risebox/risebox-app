@@ -9,8 +9,18 @@ angular.module('risebox.controllers', [])
 
 })
 
-.controller('ChemistryCtrl', function($scope, $state) {
-
+.controller('ChemistryCtrl', function($scope, $interval) {
+    $scope.runTimer = function() {
+        secondsToWait = 60
+        timer = $interval(function(){
+                    secondsToWait = secondsToWait - 1;
+                    $scope.remainingSeconds = secondsToWait
+                    if (secondsToWait == 0) {
+                        $interval.cancel(timer);
+                        timer = undefined;
+                    }
+                }, 1000);
+    };
 })
 
 ;

@@ -77,6 +77,16 @@ angular.module('risebox', ['ionic', 'risebox.controllers'])
     }
   })
 
+  .state('tabs.chemistry-new-test', {
+    url: '/chemistry/new-test',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/chemistry/new-test.html',
+        controller: 'ChemistryCtrl'
+      }
+    }
+  })
+
   .state('tabs.help', {
     url: '/help',
     views: {
