@@ -10,12 +10,15 @@ angular.module('risebox.controllers', [])
 })
 
 .controller('ChemistryCtrl', function($scope, $interval) {
+    $scope.remainingSeconds = 60;
+
     $scope.runTimer = function() {
-        secondsToWait = 60
+        // secondsToWait = 60
         timer = $interval(function(){
-                    secondsToWait = secondsToWait - 1;
-                    $scope.remainingSeconds = secondsToWait
-                    if (secondsToWait == 0) {
+                    // secondsToWait = secondsToWait - 1;
+                    // $scope.remainingSeconds = secondsToWait
+                    $scope.remainingSeconds -= 1
+                    if ($scope.remainingSeconds == 0) {
                         $interval.cancel(timer);
                         timer = undefined;
                     }

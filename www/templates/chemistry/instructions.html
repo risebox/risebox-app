@@ -1,32 +1,37 @@
 <ion-view view-title="Comment tester l'eau">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
         <ion-slide>
-            <h1>Comment tester l'eau?</h1>
-            <h2>Bandelettes et carte</h2>
+            <br/>
+            <h2 class="center-text">Bandelettes et carte</h2>
             <p>Préparez les bandelettes de test fournies avec votre Risebox ainsi que votre carte-mire</p>
+
             <button class="button center-block button-balanced" ui-sref="tabs.chemistry-new-test">
-              Ok compris
+              Quitter le tuto
             </button>
         </ion-slide>
         <ion-slide>
-          <div class="card">
-            <h1>YELLOW</h1>
-            <h2>Plongez-la bandelette dans l'eau</h2>
+            <br/>
+            <h2 class="center-text">Plongez-la bandelette dans l'eau</h2>
             <p>Durant 3 secondes</p>
-          </div>
+            <button class="button center-block button-balanced" ui-sref="tabs.chemistry-new-test">
+              Quitter le tuto
+            </button>
         </ion-slide>
         <ion-slide>
-          <div class="card">
-            <h1>PINK</h1>
-            <h2>Attendez 60 secondes</h2>
-            <p>L'application vous affichera un minuteur, il faudra attendre</p>
-          </div>
+          <br/>
+          <h2 class="center-text">Attendez 60 secondes</h2>
+          <p>L'application vous affichera un minuteur, il faudra attendre</p>
+          <button class="button center-block button-balanced" ui-sref="tabs.chemistry-new-test">
+            Quitter le tuto
+          </button>
         </ion-slide>
         <ion-slide>
-          <div class="card">
-            <h2>Fini !</h2>
-            <p>l'application traite les résultats, vous serez notifié quand les résultats sont connus</p>
-          </div>
+          <br/>
+          <h2 class="center-text">Fini !</h2>
+          <p>l'application traite les résultats, vous serez notifié quand les résultats sont connus</p>
+          <button class="button center-block button-balanced" ui-sref="tabs.chemistry-new-test">
+            Quitter le tuto
+          </button>
         </ion-slide>
     </ion-slide-box>
 </ion-view>
