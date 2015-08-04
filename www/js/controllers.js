@@ -9,20 +9,33 @@ angular.module('risebox.controllers', [])
 
 })
 
-.controller('ChemistryCtrl', function($scope, $interval) {
-    $scope.remainingSeconds = 60;
+.controller('ChemistryCtrl', function($scope, $interval, Camera) {
+    // $scope.remainingSeconds = 60;
+    $scope.remainingSeconds = 3;
 
     $scope.runTimer = function() {
-        // secondsToWait = 60
-        timer = $interval(function(){
-                    // secondsToWait = secondsToWait - 1;
-                    // $scope.remainingSeconds = secondsToWait
-                    $scope.remainingSeconds -= 1
-                    if ($scope.remainingSeconds == 0) {
-                        $interval.cancel(timer);
-                        timer = undefined;
-                    }
-                }, 1000);
+      timer = $interval(function(){
+                $scope.remainingSeconds = $scope.remainingSeconds - 1
+                if ($scope.remainingSeconds == 0) {
+                  $interval.cancel(timer);
+                  timer = undefined;
+                  $scope.getPhoto();
+                }
+      }, 1000);
+    };
+
+    $scope.getPhoto = function() {
+        Camera.getPicture().then(function(imageURI) {
+          // console.log(imageURI);
+          $scope.lastPhoto = imageURI;
+        }, function(err) {
+          console.err(err);
+        }, {
+          quality: 100,
+          targetWidth: 480,
+          targetHeight: 640,
+          saveToPhotoAlbum: false
+        });
     };
 })
 
