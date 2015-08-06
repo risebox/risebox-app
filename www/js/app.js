@@ -9,6 +9,10 @@ angular.module('risebox', ['ionic', 'ngCordova', 'risebox.controllers', 'risebox
   url: 'https://rbnna-api.herokuapp.com'
 })
 
+.config(function($compileProvider){
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+})
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

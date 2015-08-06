@@ -9,4 +9,13 @@
     <button class="button center-block button-balanced" ng-click='runTimer()'>
       <i class="icon ion-ios-stopwatch-outline"></i>&nbsp;Démarrer le chrono
     </button>
+<!--     <button id="detectARCodeBtn" ng-click="detectArCode()" class="button button-block button-calm" ng-show="lastPhoto != null">
+        Detect AR Code
+    </button> -->
+    <img id="imgCamera" ng-src="{{lastPhoto}}" style="max-width: 100%">
+    <!-- <img id="imgCamera" ng-src="{{lastPhoto}}" style="max-width: 100%; display:none;"> -->
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas2"></canvas>
+    <!-- <button id="download" ng-click="downloadCroppedImage()" class="button button-block button-royal">Save Crop</button>
+    <img id="imgCrop" ng-src="{{cropedPhoto}}" style="max-width: 100%"> -->
 </ion-view>
