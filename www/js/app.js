@@ -9,6 +9,12 @@ angular.module('risebox', ['ionic', 'ngCordova', 'risebox.controllers', 'risebox
   url: 'https://rbnna-api.herokuapp.com'
 })
 
+.constant('$ionicLoadingConfig', {
+  template: '<ion-spinner icon="spiral" class="spinner-balanced"></ion-spinner>&nbsp;Traitement en cours ...',
+  hideOnStateChange: true,
+  duration: 10000
+})
+
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 })

@@ -9,9 +9,8 @@ angular.module('risebox.controllers', [])
 
 })
 
-.controller('ChemistryCtrl', function($scope, $timeout, $interval, $cordovaCamera, $ionicPopup, $q, Uploader, ArCode) {
-    // $scope.remainingSeconds = 60;
-    $scope.remainingSeconds = 3;
+.controller('ChemistryCtrl', function($scope, $state, $timeout, $interval, $cordovaCamera, $ionicPopup, $ionicLoading, $q, Uploader, ArCode) {
+    $scope.remainingSeconds = 1;
     $scope.cameraImage = null;
 
     function sleep(milliseconds) {
@@ -48,13 +47,11 @@ angular.module('risebox.controllers', [])
     };
 
     $scope.getPhoto = function() {
-      console.log('getPhoto');
       $cordovaCamera.getPicture().then(function(imageData) {
+        $ionicLoading.show();
         $scope.lastPhoto = imageData;
 
         $timeout(function() {
-          // anything you want can go here and will safely be run on the next digest.
-          // document.getElementById("detectArCodeBtn").click();
           $scope.detectArCode();
         }, 1000, false);
       }, function(err) {
@@ -102,6 +99,7 @@ angular.module('risebox.controllers', [])
 
       if (markers.length < 3) {
         console.log('Not enough markers, please do it again !');
+        $ionicLoading.hide();
         $ionicPopup.alert({
             title: "Oups... l'image n'est pas lisible....",
             template: "J'essaye à nouveau"
@@ -144,29 +142,25 @@ angular.module('risebox.controllers', [])
   };
 
   $scope.uploadCroppedImage = function() {
-    console.log('uploadCroppedImage');
     canvas2 = document.getElementById("canvas2");
     dataURL = canvas2.toDataURL();
 
     var fileName = "raw_strip" + (new Date()).getTime() + ".jpg";
 
-    Uploader.upload(dataURL, fileName)
-      .done(function () {
-        console.log("S3 upload succeeded");
-        $ionicPopup.alert({
-          title: "Ok test enregistré....",
-          template: "Le traitement de l'image est en cours... Vous recevrez une notification lorsque l'analyse' est terminée"
-        });
-      })
-      .fail(function () {
-        console.log("S3 upload failed");
-        $ionicPopup.alert({
-          title: "Oups... l'image n'a pas pu être traitée...",
-          template: "Vérifier votre connexion réseau et essayez à nouveau"
-        });
+    Uploader.upload(dataURL, fileName, function() {
+      $ionicLoading.hide();
+      $ionicPopup.alert({
+        title: "Ok test enregistré....",
+        template: "Le traitement de l'image est en cours... Vous recevrez une notification lorsque l'analyse sera terminée"
       });
-    console.log(dataURL);
-    $scope.cropedPhoto = dataURL;
+      $state.go('tabs.box');
+    }, function(){
+      $ionicLoading.hide();
+      $ionicPopup.alert({
+        title: "Oups... l'image n'a pas pu être traitée...",
+        template: "Vérifier votre connexion réseau et essayez à nouveau"
+      });
+    });
   };
 })
 

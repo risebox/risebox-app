@@ -76,16 +76,13 @@ angular.module('risebox.services', [])
 
 .factory('Uploader', function($ionicPlatform, $cordovaFileTransfer, Api) {
 
-  var upload = function (imageURI, fileName) {
+  var upload = function (imageURI, fileName, doneFct, failFct) {
     var options = {
       "fileKey": "file",
       "fileName": fileName,
       "mimeType": "image/jpeg",
       "chunkedMode": false
     };
-
-    console.log("Api");
-    console.log(Api);
 
     Api.getSignature({"file_name": fileName})
         .then(function(sigResult) {
@@ -99,32 +96,20 @@ angular.module('risebox.services', [])
             "signature": sigResult.signature
           };
           $ionicPlatform.ready(function() {
-            console.log("FileTransfer uploader");
-            console.log(FileTransfer);
-            console.log("options");
-            console.log(options);
-
             $cordovaFileTransfer
               .upload("https:" + sigResult.url, imageURI, options)
               .then(function(uploadResult) {
-                console.log('upload complete');
-                console.log(uploadResult);
-
                 Api.analyzeStrip({"model": "JBL EasyTest 6in1", "upload_key": fileName})
                   .then(function(analyze) {
-                    console.log('analyze in progress you will be notified');
-                    console.log(analyze);
+                    doneFct();
                   }, function(err) {
-                    console.log('analyze failed');
-                    console.log(err);
+                    failFct();
                   })
 
               }, function(err) {
-                console.log('upload failed');
-                console.log(err);
+                failFct();
               }, function (progress) {
-                console.log('upload in progress');
-                console.log(progress);
+
               });
           });
         });
