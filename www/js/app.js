@@ -1,4 +1,4 @@
-angular.module('risebox', ['ionic', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.controllers', 'risebox.services'])
+angular.module('risebox', ['ionic', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.services', 'risebox.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
