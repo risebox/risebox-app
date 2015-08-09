@@ -13,6 +13,17 @@ angular.module('risebox.config', ['ionic'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
+
+  var checkLogin = function ($q, $rootScope, $location) {
+    if ($rootScope.user) {
+        //je fais /login avec mon access_token => si oui je passe sinon je dois me réenregistrer.
+        return true;
+    } else {
+        $location.path('/welcome');
+    }
+  };
+
   $stateProvider
 
   .state('welcome', {
@@ -29,8 +40,10 @@ angular.module('risebox.config', ['ionic'])
   .state('tabs', {
     url: "/tabs",
     abstract: true,
-    templateUrl: "templates/tabs.html"
-  })
+    templateUrl: "templates/tabs.html",
+    resolve: {
+      factory: checkLogin
+
 
   .state('tabs.box', {
     url: '/box',
@@ -92,7 +105,7 @@ angular.module('risebox.config', ['ionic'])
   ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/tabs/box');
 })
 
 ;
