@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Uploader', function($ionicPlatform, $cordovaFileTransfer, Api) {
+.factory('Uploader', function($ionicPlatform, $cordovaFileTransfer, RiseboxApi) {
 
   var upload = function (imageURI, fileName, doneFct, failFct) {
     var options = {
@@ -10,7 +10,7 @@ angular.module('risebox.services')
       "chunkedMode": false
     };
 
-    Api.getSignature({"file_name": fileName})
+    RiseboxApi.getSignature({"file_name": fileName})
         .then(function(sigResult) {
           options.params = {
             "acl": "public-read",
@@ -25,7 +25,7 @@ angular.module('risebox.services')
             $cordovaFileTransfer
               .upload("https:" + sigResult.url, imageURI, options)
               .then(function(uploadResult) {
-                Api.analyzeStrip({"model": "JBL EasyTest 6in1", "upload_key": fileName})
+                RiseboxApi.analyzeStrip({"model": "JBL EasyTest 6in1", "upload_key": fileName})
                   .then(function(analyze) {
                     doneFct();
                   }, function(err) {

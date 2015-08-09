@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Api', function($http, $q, ApiEndpoint) {
+.factory('RiseboxApi', function($http, $q, RiseboxApiEndpoint) {
 
   var config = {
     headers: {
@@ -11,7 +11,7 @@ angular.module('risebox.services')
   var getApiData = function() {
     var q = $q.defer();
 
-    $http.get(ApiEndpoint.url)
+    $http.get(RiseboxApiEndpoint.url)
     .success(function(data) {
       console.log('Got some data: ', data)
       q.resolve(data);
@@ -27,7 +27,7 @@ angular.module('risebox.services')
   var getSignature = function(params) {
     var q = $q.defer();
 
-    $http.post(ApiEndpoint.url + '/sign', params)
+    $http.post(RiseboxApiEndpoint.url + '/sign', params)
     .success(function(data) {
       console.log('Posted some data: ', data)
       q.resolve(data);
@@ -48,7 +48,7 @@ angular.module('risebox.services')
 
     $http({
         method: "post",
-        url: ApiEndpoint.url + '/api/devices/lab1/strips',
+        url: RiseboxApiEndpoint.url + '/api/devices/lab1/strips',
         headers: {
           "RISEBOX-SECRET": 'token2'
         },

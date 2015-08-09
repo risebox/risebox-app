@@ -33,7 +33,6 @@ angular.module('risebox.routing', ['ionic'])
     }
   })
 
-
   .state('tabs.box', {
     url: '/box',
     views: {

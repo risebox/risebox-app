@@ -1,6 +1,6 @@
 angular.module('risebox.constants', ['ionic'])
 
-.constant('ApiEndpoint', {
+.constant('RiseboxApiEndpoint', {
   url: 'https://rbnna-api.herokuapp.com'
 })
 
