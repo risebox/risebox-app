@@ -10,7 +10,7 @@ angular.module('risebox.services')
       "chunkedMode": false
     };
 
-    RiseboxApi.getSignature({"file_name": fileName})
+    RiseboxApi.getUploadSignature({"file_name": fileName})
         .then(function(sigResult) {
           options.params = {
             "acl": "public-read",
