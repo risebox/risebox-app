@@ -37,9 +37,31 @@ angular.module('risebox.services')
     return q.promise;
   }
 
+  var registerDevice = function(params) {
+    var q = $q.defer();
+
+    $http({
+        method: "post",
+        url: RiseboxApiEndpoint.url + '/api/devices/' + params.key + '/registration',
+        headers: {
+          "RISEBOX-SECRET": params.token
+        },
+        data: params
+    })
+    .success(function(data) {
+      q.resolve(data);
+    })
+    .error(function(error){
+      q.reject(error);
+    })
+
+    return q.promise;
+  }
+
   return {
     getUploadSignature: getUploadSignature,
-    analyzeStrip: analyzeStrip
+    analyzeStrip: analyzeStrip,
+    registerDevice: registerDevice
   };
 
 });
