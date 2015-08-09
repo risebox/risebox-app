@@ -1,4 +1,4 @@
-<ion-view view-title="Tester votre eau" class="nna-content">
+<ion-view view-title="Tester votre eau" class="nna-content" data-ng-init="initCountdown()">
     <br/><br/><br/>
     <p class="center-text">Munissez-vous de votre bandellette test et trempez là dans l'eau pendant 2-3 secondes</p>
     <br/><br/>
@@ -6,7 +6,7 @@
     <br/><br/>
     <h2 class="center-text">{{remainingSeconds}}</h2>
     <br/><br/>
-    <button class="button center-block button-balanced" ng-click='runTimer()'>
+    <button class="button center-block button-balanced" ng-click='testStrip()'>
       <i class="icon ion-ios-stopwatch-outline"></i>&nbsp;Démarrer le chrono
     </button>
     <img id="imgCamera" ng-src="{{lastPhoto}}" style="max-width: 100%">

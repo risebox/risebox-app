@@ -1,49 +1,67 @@
 angular.module('risebox.controllers')
 
-.controller('ChemistryCtrl', function($scope, $state, $timeout, $interval, $cordovaCamera, $ionicPopup, $ionicLoading, $q, Uploader, ArCode) {
-    $scope.remainingSeconds = 1;
-    $scope.cameraImage = null;
+.controller('ChemistryCtrl', function($scope, $state, $timeout, $interval, $cordovaCamera, $ionicPopup, $ionicLoading, Uploader, ArCode) {
+    $scope.secondsToWait = $scope.remainingSeconds = 3  ;
 
-    function sleep(milliseconds) {
-      var start = new Date().getTime();
-      for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds){
-          break;
-        }
-      }
-    }
+    $scope.testStrip = function() {
+      countdown(function(){
+        getPhoto(function(){
+          detectArCode(function(){
+            uploadCroppedImage(
+              function(){
+                testSuccess("Le traitement de l'image est en cours... Vous recevrez une notification lorsque l'analyse sera terminée")
+              },
+              function(){
+                testFail("Vérifier votre connexion réseau et essayez à nouveau")
+              }
+            );
+          });
+        });
+      });
+    };
 
-    $scope.runTimer = function() {
+    var initCountdown = function() {
+      $scope.remainingSeconds = $scope.secondsToWait;
+      $scope.lastPhoto = null; //TODO change to other method so that it removes photo from screen
+    };
+
+    var testSuccess = function(text) {
+      $ionicLoading.hide();
+      $ionicPopup.alert({
+        title: "Votre image est correcte",
+        template: text
+      });
+      initCountdown();
+      $state.go('tabs.box');
+    };
+
+    var testFail = function(text) {
+      $ionicLoading.hide();
+      $ionicPopup.alert({
+        title: "Erreur lors du traitement de l'image",
+        template: text
+      });
+    };
+
+    var countdown = function(callback) {
       timer = $interval(function(){
-                $scope.remainingSeconds = $scope.remainingSeconds - 1
                 if ($scope.remainingSeconds == 0) {
                   $interval.cancel(timer);
                   timer = undefined;
-
-                  $scope.getPhoto();
-
-                  // $scope.getPhoto().then(function(imageData) {
-                  //   console.log(imageData);
-                  //   console.log('$scope.getPhoto() DONE');
-                  //   $scope.lastPhoto = imageData;
-                  //   $scope.detectArCode().then(function() {
-                  //     console.log('$scope.detectArCode() DONE');
-                  //     $scope.uploadCroppedImage()
-                  //     console.log('$scope.uploadCroppedImage() DONE');
-                  //   });
-                  // });
-
+                  callback();
+                } else {
+                  $scope.remainingSeconds = $scope.remainingSeconds - 1
                 }
       }, 1000);
     };
 
-    $scope.getPhoto = function() {
+    var getPhoto = function(callback) {
       $cordovaCamera.getPicture().then(function(imageData) {
         $ionicLoading.show();
         $scope.lastPhoto = imageData;
 
         $timeout(function() {
-          $scope.detectArCode();
+          callback();
         }, 1000, false);
       }, function(err) {
         console.err(err);
@@ -58,21 +76,13 @@ angular.module('risebox.controllers')
       });
     };
 
-    $scope.detectArCode = function() {
+    var detectArCode = function(callback) {
       canvas = document.getElementById("canvas");
       context = canvas.getContext("2d");
 
       detector = new AR.Detector();
 
       var imageObj = document.getElementById("imgCamera");
-
-      console.log("imageObj");
-      console.log(imageObj);
-
-      console.log("imageObj.width");
-      console.log(imageObj.width);
-      console.log("imageObj.height");
-      console.log(imageObj.height);
 
       canvas.width = parseInt(imageObj.width);
       canvas.height = parseInt(imageObj.height);
@@ -90,11 +100,7 @@ angular.module('risebox.controllers')
 
       if (markers.length < 3) {
         console.log('Not enough markers, please do it again !');
-        $ionicLoading.hide();
-        $ionicPopup.alert({
-            title: "Oups... l'image n'est pas lisible....",
-            template: "J'essaye à nouveau"
-          });
+        testFail("l'image n'est pas lisible....");
       }
       else {
         console.log('Enough markers: will crop now');
@@ -128,31 +134,19 @@ angular.module('risebox.controllers')
         canvas2.height = destHeight;
         context2.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
 
-        $scope.uploadCroppedImage();
+        callback();
       }
   };
 
-  $scope.uploadCroppedImage = function() {
+  var uploadCroppedImage = function(success, error) {
     canvas2 = document.getElementById("canvas2");
     dataURL = canvas2.toDataURL();
 
     var fileName = "raw_strip" + (new Date()).getTime() + ".jpg";
 
-    Uploader.upload(dataURL, fileName, function() {
-      $ionicLoading.hide();
-      $ionicPopup.alert({
-        title: "Ok test enregistré....",
-        template: "Le traitement de l'image est en cours... Vous recevrez une notification lorsque l'analyse sera terminée"
-      });
-      $state.go('tabs.box');
-    }, function(){
-      $ionicLoading.hide();
-      $ionicPopup.alert({
-        title: "Oups... l'image n'a pas pu être traitée...",
-        template: "Vérifier votre connexion réseau et essayez à nouveau"
-      });
-    });
+    Uploader.upload(dataURL, fileName, success, error);
   };
+
 })
 
 ;
