@@ -1,9 +1,9 @@
 angular.module('risebox.services')
 
-.factory('Access', function($localstorage, $state, $ionicPopup, RiseboxApi) {
+.factory('Access', function($state, $ionicPopup, RiseboxObj, RiseboxApi) {
 
   var token_exists = function() {
-    if ($localstorage.get('risebox-registration-token') != null) {
+    if (RiseboxObj.getToken() != null) {
       return true;
     }
     else {
@@ -17,9 +17,11 @@ angular.module('risebox.services')
 
   var login = function (){
     if (token_exists() == true){
-      RiseboxApi.login({token: $localstorage.get('risebox-registration-token')})
+      console.log('in login RiseboxObj.getToken()');
+      console.log(RiseboxObj.getToken());
+      RiseboxApi.login({token: RiseboxObj.getToken()})
       .then(function(response) {
-        $localstorage.setObject('risebox-registration-info', response)
+         RiseboxObj.setInfo(response);
         $state.go('tabs.box');
       }, function(err) {
         $ionicPopup.alert({
