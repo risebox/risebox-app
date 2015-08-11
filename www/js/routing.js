@@ -1,15 +1,6 @@
-angular.module('risebox.routing', ['ionic'])
+angular.module('risebox.routing', ['ionic', 'risebox.services'])
 
 .config(function($stateProvider, $urlRouterProvider) {
-
-  var checkLogin = function ($q, $rootScope, $location) {
-    if ($rootScope.user) {
-        //je fais /login avec mon access_token => si oui je passe sinon je dois me réenregistrer.
-        return true;
-    } else {
-        $location.path('/welcome');
-    }
-  };
 
   $stateProvider
 
@@ -28,9 +19,13 @@ angular.module('risebox.routing', ['ionic'])
     url: "/tabs",
     abstract: true,
     templateUrl: "templates/tabs.html",
-    resolve: {
-      factory: checkLogin
-    }
+    data: { auth: "TokenRequired"}
+    // resolve: {
+    //   AccessControl: 'AccessControl',
+    //   accessGranted: function(AccessControl){
+    //     return AccessControl.perform();
+    //   }
+    // }
   })
 
   .state('tabs.box', {
