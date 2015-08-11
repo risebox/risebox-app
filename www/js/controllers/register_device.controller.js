@@ -8,7 +8,7 @@ angular.module('risebox.controllers')
                   RiseboxObj.storeToken(response.result.token);
                   RiseboxApi.login({token: RiseboxObj.getToken()})
                   .then(function(response) {
-                    RiseboxObj.setInfo(response);
+                    RiseboxObj.setInfo(response.result);
                     $state.go('tabs.box');
                   }, function(err) {
                     console.log('Login error');

@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Uploader', function($ionicPlatform, $cordovaFileTransfer, RiseboxApi) {
+.factory('Uploader', function($ionicPlatform, $cordovaFileTransfer, RiseboxApi, RiseboxObj) {
 
   var upload = function (imageURI, fileName, doneFct, failFct) {
     var options = {
@@ -25,7 +25,9 @@ angular.module('risebox.services')
             $cordovaFileTransfer
               .upload("https:" + sigResult.url, imageURI, options)
               .then(function(uploadResult) {
-                RiseboxApi.analyzeStrip({"model": "JBL EasyTest 6in1", "upload_key": fileName})
+                RiseboxApi.analyzeStrip(RiseboxObj.getInfo().device.key,
+                                        RiseboxObj.getInfo().device.token,
+                                        {"model": "JBL EasyTest 6in1", "upload_key": fileName})
                   .then(function(analyze) {
                     doneFct();
                   }, function(err) {

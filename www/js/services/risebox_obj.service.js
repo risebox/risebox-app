@@ -10,7 +10,7 @@ angular.module('risebox.services')
   }
 
   var setInfo = function(info){
-    _info = info
+    _info = info.result
   }
 
   var getToken = function() {
