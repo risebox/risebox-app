@@ -1,31 +1,15 @@
 angular.module('risebox.services')
 
-.factory('RiseboxApi', function($http, $q, RiseboxApiEndpoint) {
+.factory('RiseboxApi', function($http, $q, RiseboxApiEndpoint, $localstorage) {
 
-  var getUploadSignature = function(params) {
-    var q = $q.defer();
-
-    $http.post(RiseboxApiEndpoint.url + '/sign', params)
-    .success(function(data) {
-      q.resolve(data);
-    })
-    .error(function(error){
-      q.reject(error);
-    })
-
-    return q.promise;
-  }
-
-  var analyzeStrip = function(params) {
+  var callApi = function(verb, url, headers, params) {
     var q = $q.defer();
 
     $http({
-        method: "post",
-        url: RiseboxApiEndpoint.url + '/api/devices/lab1/strips',
-        headers: {
-          "RISEBOX-SECRET": 'token2'
-        },
-        data: params
+      method:  verb,
+      url:     RiseboxApiEndpoint.url + url,
+      headers: headers,
+      data:    params
     })
     .success(function(data) {
       q.resolve(data);
@@ -37,50 +21,36 @@ angular.module('risebox.services')
     return q.promise;
   }
 
+  var registrationToken = function(token){
+    return {"RISEBOX-REGISTRATION-TOKEN": token}
+  }
+
+  var secret = function(){
+    return {"RISEBOX-SECRET": 'token2'}
+  }
+
+  //Exposed APIs
   var registerDevice = function(params) {
-    var q = $q.defer();
-
-    $http({
-        method: "post",
-        url: RiseboxApiEndpoint.url + '/api/registration',
-        data: params
-    })
-    .success(function(data) {
-      q.resolve(data);
-    })
-    .error(function(error){
-      q.reject(error);
-    })
-
-    return q.promise;
+   return callApi('post', '/api/registration', null, params)
   }
 
   var login = function(params) {
-    var q = $q.defer();
+    return callApi('post', '/api/login', registrationToken(params.token), params)
+  }
 
-    $http({
-        method: "post",
-        url: RiseboxApiEndpoint.url + '/api/login',
-        headers: {
-          "RISEBOX-REGISTRATION-TOKEN": params.token
-        },
-        data: params
-    })
-    .success(function(data) {
-      q.resolve(data);
-    })
-    .error(function(error){
-      q.reject(error);
-    })
+  var getUploadSignature = function(params) {
+    return callApi('post', '/sign', null, params)
+  }
 
-    return q.promise;
+  var analyzeStrip = function(params) {
+   return callApi('post', '/api/devices/lab1/strips', secret(), params)
   }
 
   return {
+    registerDevice: registerDevice,
+    login: login,
     getUploadSignature: getUploadSignature,
     analyzeStrip: analyzeStrip,
-    registerDevice: registerDevice,
-    login: login
   };
 
 });
