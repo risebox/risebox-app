@@ -1,6 +1,6 @@
-angular.module('risebox', ['ionic', 'ionic.utils', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
+angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'ionic.utils', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
-.run(function($ionicPlatform, $rootScope, Access) {
+.run(function($ionicPlatform, $rootScope, Access, Ionic) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,7 +14,10 @@ angular.module('risebox', ['ionic', 'ionic.utils', 'ngCordova', 'risebox.constan
     }
 
     //Ping server and get fresh registration, user and device info
-    Access.login()
+    Access.login().then(function(){
+      Ionic.identifyUser();
+      Ionic.pushRegister();
+    });
 
     //On every secure page check that that token is present
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -24,7 +27,8 @@ angular.module('risebox', ['ionic', 'ionic.utils', 'ngCordova', 'risebox.constan
           Access.redirect_to_registration();
         }
       }
-    })
+    });
+
   });
 })
 

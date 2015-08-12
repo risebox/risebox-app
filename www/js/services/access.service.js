@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Access', function($state, $ionicPopup, RiseboxObj, RiseboxApi) {
+.factory('Access', function($q, $state, $ionicPopup, RiseboxObj, RiseboxApi) {
 
   var token_exists = function() {
     if (RiseboxObj.getToken() != null) {
@@ -17,18 +17,20 @@ angular.module('risebox.services')
 
   var login = function (){
     if (token_exists() == true){
-      console.log('in login RiseboxObj.getToken()');
-      console.log(RiseboxObj.getToken());
+      var q = $q.defer();
       RiseboxApi.login({token: RiseboxObj.getToken()})
       .then(function(response) {
-         RiseboxObj.setInfo(response);
+        RiseboxObj.setInfo(response);
         $state.go('tabs.box');
+        q.resolve();
       }, function(err) {
         $ionicPopup.alert({
           title: 'Oups ...',
           template: "Erreur lors du login... Essaye à nouveau !"
         });
+        q.reject(err);
       });
+      return q.promise;
     }
     else {
       redirect_to_registration()

@@ -12,4 +12,12 @@ angular.module('risebox.config', ['ionic'])
   $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
 })
 
+.config(['$ionicAppProvider', function($ionicAppProvider) {
+  $ionicAppProvider.identify({
+    app_id: 'd49a75b8',
+    api_key: 'dd893ae489424ab24bd6d0cdcf5dbc4015a8dfd9c6233a96',
+    dev_push: true
+  });
+}])
+
 ;

@@ -22,11 +22,21 @@ angular.module('risebox.services')
     _token = token
   }
 
+  var setIonicUserId = function(userId) {
+    _info['user']['ionic_id'] = userId;
+  }
+
+  var setPush = function(push_data) {
+    _info['push'] = push_data;
+  }
+
   return {
     getInfo: getInfo,
     setInfo: setInfo,
     getToken: getToken,
-    storeToken: storeToken
+    storeToken: storeToken,
+    setIonicUserId: setIonicUserId,
+    setPush: setPush
   };
 
 });
