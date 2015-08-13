@@ -35,8 +35,7 @@ angular.module('risebox.services')
         return true;
       }
     }).then(function(){
-      console.log('$ionicPush.register');
-      console.log($ionicPush.register);
+
     });
   }
 
