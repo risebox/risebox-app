@@ -30,13 +30,18 @@ angular.module('risebox.services')
     _info['push'] = push_data;
   }
 
+  var getRiseboxUserId = function() {
+    return _info['user']['id'];
+  }
+
   return {
     getInfo: getInfo,
     setInfo: setInfo,
     getToken: getToken,
     storeToken: storeToken,
     setIonicUserId: setIonicUserId,
-    setPush: setPush
+    setPush: setPush,
+    getRiseboxUserId: getRiseboxUserId
   };
 
 });

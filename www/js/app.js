@@ -31,7 +31,7 @@ angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'i
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
       console.log('Ionic Push: Got token ', data.token, data.platform);
       RiseboxObj.setPush({platform: data.platform, token: data.token});
-      Ionic.identifyUser(null);
+      Ionic.identifyUser({risebox: {user_id: RiseboxObj.getRiseboxUserId}});
     });
 
   });
