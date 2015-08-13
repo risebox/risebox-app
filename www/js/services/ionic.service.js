@@ -2,7 +2,7 @@ angular.module('risebox.services')
 
 .factory('Ionic', function($rootScope, $ionicUser, $ionicPush, RiseboxObj) {
 
-  var identifyUser = function() {
+  var identifyUser = function(extra_metadata) {
     console.log('Ionic User: Identifying with Ionic User service');
     var user = $ionicUser.get();
     if(!user.user_id) {
@@ -11,14 +11,12 @@ angular.module('risebox.services')
     };
 
     // Add some metadata to your user object.
-    angular.extend(user, {
-      first_name: RiseboxObj.getInfo().user.first_name,
-    });
+    angular.extend(user, extra_metadata);
 
     // Identify your user with the Ionic User Service
     $ionicUser.identify(user).then(function(){
       RiseboxObj.setIonicUserId(user.user_id);
-      console.log('Ionic Identified user ' + user.name + '\n ID ' + user.user_id);
+      console.log('Ionic Identified user ' + user.first_name + '\n ID ' + user.user_id);
     });
   }
 
@@ -36,11 +34,9 @@ angular.module('risebox.services')
         console.log(notification);
         return true;
       }
-    });
-
-    $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-      console.log('Ionic Push: Got token ', data.token, data.platform);
-      RiseboxObj.setPush({platform: data.platform, token: data.token});
+    }).then(function(){
+      console.log('$ionicPush.register');
+      console.log($ionicPush.register);
     });
   }
 

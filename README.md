@@ -2,6 +2,7 @@
 
 ### Contents
 - [Installation](#install)
+- [Push Notifications](#push)
 
 ##<a name="install"></a> Installation
 0. Prerequisites:
@@ -39,3 +40,19 @@
   ```
   npm install -g ios-sim
   ```
+
+##<a name="push"></a> Push Notifications
+
+There is an issue with PushPlugin 2.5.0.
+If you see this error while building
+```
+UNEXPECTED TOP-LEVEL EXCEPTION:
+com.android.dex.DexException: Multiple dex files define Landroid/support/v4/app/NotificationCompatHoneycomb;
+```
+Then you should follow advice here:
+https://github.com/phonegap-build/PushPlugin/issues/594
+
+=> At the end of platforms/android/build.gradle put this
+configurations {
+all*.exclude group: 'com.android.support', module: 'support-v4'
+}

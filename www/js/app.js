@@ -1,6 +1,6 @@
 angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'ionic.utils', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
-.run(function($ionicPlatform, $rootScope, Access, Ionic) {
+.run(function($ionicPlatform, $rootScope, Access, Ionic, RiseboxObj) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,7 +15,6 @@ angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'i
 
     //Ping server and get fresh registration, user and device info
     Access.login().then(function(){
-      Ionic.identifyUser();
       Ionic.pushRegister();
     });
 
@@ -27,6 +26,12 @@ angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'i
           Access.redirect_to_registration();
         }
       }
+    });
+
+    $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+      console.log('Ionic Push: Got token ', data.token, data.platform);
+      RiseboxObj.setPush({platform: data.platform, token: data.token});
+      Ionic.identifyUser(null);
     });
 
   });
