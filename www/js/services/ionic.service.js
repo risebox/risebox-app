@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Ionic', function($rootScope, $ionicUser, $ionicPush, RiseboxObj) {
+.factory('Ionic', function($rootScope, $ionicUser, $ionicPush, RiseboxObj, Push) {
 
   var identifyUser = function(extra_metadata) {
     console.log('Ionic User: Identifying with Ionic User service');
@@ -32,6 +32,7 @@ angular.module('risebox.services')
       onNotification: function(notification) {
         console.log('notification');
         console.log(notification);
+        Push.notificationReceived(notification);
         return true;
       }
     }).then(function(){
