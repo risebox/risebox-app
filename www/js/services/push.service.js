@@ -12,7 +12,7 @@ angular.module('risebox.services')
         onNotificationAPN(message);
       }
     } else {
-      console.log("Message" + message.event + "received : won't do anything, Ionic Push will call webhook");
+      console.log("Message " + message.event + " received : won't do anything, Ionic Push will call webhook");
     }
   }
 
@@ -76,11 +76,6 @@ angular.module('risebox.services')
   }
 
   var handleNotification = function (e) {
-    console.log('=> handleNotification');
-
-    console.log('stateParams');
-    console.log(e.payload.payload.$stateParams);
-
     if (!e.foreground){
       $ionicPopup.alert({
         title: e.payload.title,
@@ -88,9 +83,6 @@ angular.module('risebox.services')
       });
     }
 
-    console.log("moving to "+e.payload.payload.$state);
-    console.log('JSON.parse(e.payload.payload.$stateParams)');
-    console.log(JSON.parse(e.payload.payload.$stateParams));
     $state.go(e.payload.payload.$state, JSON.parse(e.payload.payload.$stateParams));
   }
 

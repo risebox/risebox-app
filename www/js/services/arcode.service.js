@@ -52,9 +52,6 @@ angular.module('risebox.services')
     getMarkerCorners: function(markers, context){
       var newMarker = {};
       for (var i = 0; i < markers.length; i++) {
-        console.log('computing marker');
-        console.log(i);
-
         marker = markers[i];
         var sum = minSum = maxSum = 0;
         var sumArray = {};

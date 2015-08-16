@@ -1,13 +1,7 @@
 angular.module('risebox.controllers')
 
 .controller('ChemistryShowCtrl', function($scope, $stateParams, RiseboxApi, RiseboxObj) {
-
-    console.log("$stateParams");
-    console.log($stateParams);
-
     var doneFct = function(result){
-      console.log("result");
-      console.log(result);
       $scope.strip = result.result;
     }
 
