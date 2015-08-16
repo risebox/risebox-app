@@ -46,11 +46,16 @@ angular.module('risebox.services')
    return callApi('post', '/api/devices/'+ box_key +'/strips', secretHeader(box_secret), params)
   }
 
+  var getStripResults = function(box_key, box_secret, strip_id, params) {
+   return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, secretHeader(box_secret), params)
+  }
+
   return {
     registerDevice: registerDevice,
     login: login,
     getUploadSignature: getUploadSignature,
     analyzeStrip: analyzeStrip,
+    getStripResults: getStripResults
   };
 
 });

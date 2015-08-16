@@ -42,7 +42,7 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     views: {
       'box-tab': {
         templateUrl: 'templates/chemistry/status.html',
-        controller: 'ChemistryCtrl'
+        controller: 'ChemistryNewCtrl'
       }
     }
   })
@@ -52,7 +52,7 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     views: {
       'box-tab': {
         templateUrl: 'templates/chemistry/instructions.html',
-        controller: 'ChemistryCtrl'
+        controller: 'ChemistryNewCtrl'
       }
     }
   })
@@ -62,7 +62,17 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     views: {
       'box-tab': {
         templateUrl: 'templates/chemistry/new-test.html',
-        controller: 'ChemistryCtrl'
+        controller: 'ChemistryNewCtrl'
+      }
+    }
+  })
+
+  .state('tabs.chemistry-result', {
+    url: '/chemistry/result/:strip_id',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/chemistry/result.html',
+        controller: 'ChemistryShowCtrl'
       }
     }
   })

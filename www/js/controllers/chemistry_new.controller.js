@@ -1,6 +1,6 @@
 angular.module('risebox.controllers')
 
-.controller('ChemistryCtrl', function($scope, $state, $timeout, $interval, $cordovaCamera, $ionicPopup, $ionicLoading, Uploader, ArCode) {
+.controller('ChemistryNewCtrl', function($scope, $state, $stateParams, $timeout, $interval, $cordovaCamera, $ionicPopup, $ionicLoading, Uploader, ArCode) {
     $scope.secondsToWait = $scope.remainingSeconds = 3  ;
 
     $scope.testStrip = function() {
