@@ -20,7 +20,7 @@ angular.module('risebox.services')
     if (token_exists() == true){
       RiseboxApi.login({token: RiseboxObj.getToken()})
       .then(function(response) {
-        RiseboxObj.setInfo(response);
+        RiseboxObj.setInfo(response.result);
         $state.go('tabs.box');
         q.resolve();
       }, function(err) {
@@ -33,7 +33,7 @@ angular.module('risebox.services')
     }
     else {
       redirect_to_registration()
-      q.resolve();
+      q.reject();
     }
     return q.promise;
   }
