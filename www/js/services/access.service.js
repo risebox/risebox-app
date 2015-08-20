@@ -28,11 +28,12 @@ angular.module('risebox.services')
           title: 'Oups ...',
           template: "Erreur lors du login... Essaye à nouveau !"
         });
+        redirect_to_registration();
         q.reject(err);
       });
     }
     else {
-      redirect_to_registration()
+      redirect_to_registration();
       q.reject();
     }
     return q.promise;
