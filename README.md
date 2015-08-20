@@ -56,3 +56,7 @@ https://github.com/phonegap-build/PushPlugin/issues/594
 configurations {
 all*.exclude group: 'com.android.support', module: 'support-v4'
 }
+
+Also don't forget to setup (or change) the push webhook url so that ionic psu service can call the server with the token
+ionic push webhook_url https://rbdev-api.herokuapp.com/api/push_update
+
