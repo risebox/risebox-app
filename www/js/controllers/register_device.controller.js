@@ -19,7 +19,7 @@ angular.module('risebox.controllers')
                     console.log('Login error');
                     $ionicPopup.alert({
                       title: 'Oups ...',
-                      template: "Erreur lors du login... Essaye à nouveau !"
+                      template: "Erreur lors de l'enregistrement... Essaye à nouveau !"
                     });
                   });
 
