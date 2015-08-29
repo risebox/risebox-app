@@ -70,7 +70,7 @@ angular.module('risebox.controllers')
       quality: 100,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
-      encodingType: Camera.EncodingType.PNG,
+      encodingType: Camera.EncodingType.JPG,
       targetWidth: 768,
       targetHeight: 1024,
       saveToPhotoAlbum: false,
@@ -121,10 +121,10 @@ angular.module('risebox.controllers')
           console.log('Enough markers: will crop now');
 
           var newMarkers = ArCode.getMarkerCorners(markers, context);
-          var rotatedImg = new Image();
-          rotatedImg.onload = function(){   // put this above img.src = …
-            rotatedImg.width = imageObj.width;
-            rotatedImg.height = imageObj.height;
+          var transformedImg = new Image();
+          transformedImg.onload = function(){   // put this above img.src = …
+            transformedImg.width = imageObj.width;
+            transformedImg.height = imageObj.height;
             var pixelsFromULCornerToStrip = 45;
             var pixelsBelowBottomCorner = 23;
 
@@ -142,11 +142,11 @@ angular.module('risebox.controllers')
             context2 = canvas2.getContext("2d");
             canvas2.width  = destWidth;
             canvas2.height = destHeight;
-            context2.drawImage(rotatedImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+            context2.drawImage(transformedImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
 
             callback();
           };
-          rotatedImg.src = canvas.toDataURL("image/png");
+          transformedImg.src = canvas.toDataURL("image/jpeg");
         }
       },
       {
@@ -168,7 +168,9 @@ angular.module('risebox.controllers')
         function (blob) {
           $cordovaFile.writeFile(cordova.file.cacheDirectory, fileName, blob, true)
           .then(function (success) {
-            Uploader.upload(success.target.localURL, fileName)
+            console.log("success");
+            console.log(success);
+            Uploader.upload(success.target.localURL, success.target.length, fileName)
             .done(function () {
               console.log("Upload succeeded");
             })
@@ -180,7 +182,7 @@ angular.module('risebox.controllers')
             console.log(error);
           });
         }
-        , 'image/png'
+        , 'image/jpeg'
       );
     };
 

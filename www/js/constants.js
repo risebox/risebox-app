@@ -1,7 +1,7 @@
 angular.module('risebox.constants', ['ionic'])
 
 .constant('RiseboxApiEndpoint', {
-  url: 'https://rbdev-api.herokuapp.com'
+  url: 'https://rbnna-api.herokuapp.com'
 })
 
 .constant('$ionicLoadingConfig', {
