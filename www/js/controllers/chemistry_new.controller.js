@@ -192,7 +192,6 @@ angular.module('risebox.controllers')
 
     canvas.width = parseInt(imageObj.width*1000/imageObj.height);
     canvas.height = 1000;
-    imageObj.remove();
 
     var imageData = null;
 
@@ -213,22 +212,34 @@ angular.module('risebox.controllers')
 
     var markers = detector.detect(imageData);
 
+    imageObj.style.display='none';
     ArCode.drawCorners(markers, context);
     ArCode.drawId(markers, context);
 
     if (markers.length < 4) {
       console.log('Not enough markers, please do it again !');
-      testFail("l'image n'est pas lisible....");
+      testFail("l'image n'est pas lisible.");
     }
     else {
       console.log('Enough markers: will crop now');
 
       var newMarkers = ArCode.getMarkerCorners(markers, context);
-      var transformedImg = new Image();
 
-      transformedImg.onload = function(){   // put this above img.src = …
-        transformedImg.width = imageObj.width;
-        transformedImg.height = imageObj.height;
+      // var transformedImg = new Image();
+
+      var transformedImg = loadImage.scale(
+        canvas, // img or canvas element
+        {maxWidth: imageObj.width}
+      );
+
+      // transformedImg.onload = function(){   // put this above img.src = …
+        // transformedImg.width = imageObj.width;
+        // transformedImg.height = imageObj.height;
+
+        if (newMarkers[68] == null || newMarkers[0] == null || newMarkers[1] == null) {
+          testFail("L'image n'est pas reconnue.");
+          return;
+        }
 
         // var pixelsFromULCornerToStrip = 45;
         // var pixelsBelowBottomCorner = 23;
@@ -295,10 +306,10 @@ angular.module('risebox.controllers')
         console.log(destHeight);
 
         context2.drawImage(transformedImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
-
+        imageObj.style.display='block';
         callback();
-      };
-      transformedImg.src = canvas.toDataURL("image/png");
+      // };
+      // transformedImg.src = canvas.toDataURL("image/png");
     }
   };
 
