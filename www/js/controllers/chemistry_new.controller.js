@@ -94,17 +94,17 @@ angular.module('risebox.controllers')
         console.log('Enough markers: will crop now');
 
         var scaledImage = loadImage.scale(
-          canvas, // img or canvas element
+          canvas,
           {maxWidth: imageObj.width}
         );
 
         strip = Strip.computeCoordinates(markers);
 
-        canvas.remove();
+        canvas.style.display = 'none';
 
         //Draw the uploaded image on screen
         var canvas2 = document.getElementById("canvas2");
-        context2 = canvas2.getContext("2d");
+        context2    = canvas2.getContext("2d");
 
         canvas2.width  = strip.width;
         canvas2.height = strip.height;
