@@ -30,7 +30,9 @@
     {
       "locator": "https://github.com/phonegap-build/PushPlugin.git",
       "id": "com.phonegap.plugins.PushPlugin"
-    }
+    },
+    "org.apache.cordova.media",
+    "cordova-plugin-screen-orientation"
   ],
   "cordovaPlatforms": [
     "ios",
