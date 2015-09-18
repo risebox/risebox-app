@@ -31,7 +31,7 @@ angular.module('risebox.services')
             .then(function(uploadResult) {
               RiseboxApi.analyzeStrip(RiseboxObj.getInfo().device.key,
                                       RiseboxObj.getInfo().device.token,
-                                      {"model": "JBL EasyTest 6in1", "upload_key": fileName})
+                                      {"model": "JBL EasyTest 6in1", "upload_key": fileName, "tested_at": new Date()})
                 .then(function(analyze) {
                   console.log('done Analyzing strip ' + JSON.stringify(analyze));
                   q.resolve();
