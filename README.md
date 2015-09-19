@@ -28,8 +28,24 @@
   ionic platform add android
   ```
 
+4. Configure risebox-app
+  Configure your app with right env variables
+  ```
+  conf
+  # or
+  ./tools/config.sh # uses env matching current branch
+
+
 4. Build and run risebox-app
-  First try using Ionic view
+  ```
+  bu
+  # or
+  ./tools/build.sh
+
+  ```
+  This will create the __www/js/config/env-config.js__ with angular constants ued by the app
+
+  Then try using Ionic view
   ```
   ionic serve --lab
   ```
@@ -46,6 +62,7 @@
 5. Run app
   * On Android:
   ```
+  ionic run android
   ```
 
   * On iOS:
@@ -56,9 +73,9 @@
 
   Then you run on device, list devices and choose to deploy on one
   ```
-  cordova run ios --device
-  cordova run ios --list
-  cordova run ios --target="iPhone-6"
+  ionic run ios --device
+  ionic run ios --list
+  ionic run ios --target="iPhone-6"
   ```
 
 ##<a name="android_provision"></a> Android provisionning

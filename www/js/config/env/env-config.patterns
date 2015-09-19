@@ -1,0 +1,7 @@
+angular.module('risebox.config')
+
+.constant('RiseboxApiEndpoint', {
+  url: '@@RiseboxApiEndpoint'
+})
+
+;

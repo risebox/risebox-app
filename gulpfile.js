@@ -3,9 +3,13 @@ var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var replace = require('gulp-replace-task');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var args    = require('yargs').argv;
+var fs      = require('fs');
+
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -49,4 +53,26 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task('config', function () {
+  // Get the environment from the command line
+  var env = args.env || 'dev';
+
+  // Read the settings from the right file
+  var filename = env + '.json';
+  var settings = JSON.parse(fs.readFileSync('./www/js/config/env/' + filename, 'utf8'));
+
+  var patterns = []
+  Object.keys(settings).forEach(function(key) {
+    patterns.push({ match: key, replacement: settings[key] })
+  });
+
+  // Replace each placeholder with the correct value for the variable.
+  gulp.src('./www/js/config/env/env-config.patterns')
+    .pipe(replace({
+      patterns: patterns
+    }))
+    .pipe(rename({ extname: '.js' }))
+    .pipe(gulp.dest('./www/js/config'));
 });

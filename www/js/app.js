@@ -1,4 +1,4 @@
-angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'ionic.utils', 'ngCordova', 'risebox.constants', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
+angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
 .run(function($ionicPlatform, $rootScope, Access, Ionic, RiseboxObj) {
   $ionicPlatform.ready(function() {
@@ -17,6 +17,7 @@ angular.module('risebox', ['ionic','ionic.service.core','ionic.service.push', 'i
     Access.login().then(function(){
       Ionic.pushRegister();
     });
+
 
     //On every secure page check that that token is present
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
