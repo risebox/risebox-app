@@ -1,3 +1,4 @@
 {
-  "RiseboxApiEndpoint" : "https://rbdev-api.herokuapp.com"
+  "RISEBOX_API_ENDPOINT" : "https://rbdev-api.herokuapp.com",
+  "IONIC_DEPLOY_CHANNEL" : "dev"
 }

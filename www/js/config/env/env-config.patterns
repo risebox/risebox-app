@@ -1,7 +1,8 @@
 angular.module('risebox.config')
 
-.constant('RiseboxApiEndpoint', {
-  url: '@@RiseboxApiEndpoint'
+.constant('EnvConfig', {
+  RISEBOX_API_ENDPOINT: { url: '@@RISEBOX_API_ENDPOINT' },
+  IONIC_DEPLOY_CHANNEL: '@@IONIC_DEPLOY_CHANNEL'
 })
 
 ;

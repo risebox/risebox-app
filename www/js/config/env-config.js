@@ -1,7 +1,8 @@
 angular.module('risebox.config')
 
-.constant('RiseboxApiEndpoint', {
-  url: 'https://rbdev-api.herokuapp.com'
+.constant('EnvConfig', {
+  RISEBOX_API_ENDPOINT: { url: 'https://rbdev-api.herokuapp.com' },
+  IONIC_DEPLOY_CHANNEL: 'dev'
 })
 
 ;
