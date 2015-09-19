@@ -16,7 +16,8 @@
 
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <!-- Cordova is bootstrapped by ionic-service-core, uncomment this if you remove ionic-service-core... -->
+<!-- <script src="cordova.js"></script> -->
 
     <!-- Computer Vision -->
     <script src="js/computer-vision/qrcode.js"></script>
@@ -24,6 +25,7 @@
 
     <!-- Ionic Services -->
     <script src="lib/ionic-service-core/ionic-core.js"></script>
+    <script src="lib/ionic-service-deploy/ionic-deploy.js"></script>
     <script src="lib/ionic-service-push/ionic-push.js"></script>
 
     <script src="js/ionic-utils.js"></script>
@@ -43,18 +45,19 @@
     <script src="js/services/access.service.js"></script>
     <script src="js/services/ionic.service.js"></script>
     <script src="js/services/push.service.js"></script>
-    <script src="js/services/arcode.service.js"></script>
     <script src="js/services/qrcode.service.js"></script>
     <script src="js/services/risebox_obj.service.js"></script>
     <script src="js/services/risebox_api.service.js"></script>
     <script src="js/services/strip.service.js"></script>
     <script src="js/services/uploader.service.js"></script>
+    <script src="js/services/versioning.service.js"></script>
 
     <!-- Risebox Controllers -->
     <script src="js/controllers/_main.js"></script>
     <script src="js/controllers/chemistry_new.controller.js"></script>
     <script src="js/controllers/chemistry_show.controller.js"></script>
     <script src="js/controllers/register_device.controller.js"></script>
+    <script src="js/controllers/about.controller.js"></script>
 
     <script src="js/app.js"></script>
   </head>

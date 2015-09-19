@@ -1,0 +1,17 @@
+<ion-view view-title="Bienvenue">
+    <br/><br/><br/>
+    <h1>Risebox App</h1>
+
+    <p>Application développé par Nicolas NARDONE et Adrien THERY</p>
+
+    <button class="button button-primary button-block " ng-click="checkForUpdates()">
+      Vérifier les mise à jour
+    </button>
+
+    <button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="updateApp()">
+      Mettre à jour
+    </button>
+
+    <progress max="100" value="{{progressPct}}" ng-if="showProgress"> </progress>
+
+</ion-view>

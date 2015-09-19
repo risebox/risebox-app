@@ -15,6 +15,12 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     controller: 'RegisterDeviceCtrl'
   })
 
+  .state('about', {
+    url: '/about',
+    templateUrl: 'templates/about.html',
+    controller: 'AboutCtrl'
+  })
+
   .state('tabs', {
     url: "/tabs",
     abstract: true,

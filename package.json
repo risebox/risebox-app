@@ -34,7 +34,8 @@
       "id": "com.phonegap.plugins.PushPlugin"
     },
     "org.apache.cordova.media",
-    "cordova-plugin-screen-orientation"
+    "cordova-plugin-screen-orientation",
+    "ionic-plugin-deploy"
   ],
   "cordovaPlatforms": [
     "ios",

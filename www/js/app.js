@@ -1,4 +1,4 @@
-angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
+angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
 .run(function($ionicPlatform, $rootScope, Access, Ionic, RiseboxObj) {
   $ionicPlatform.ready(function() {
