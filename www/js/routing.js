@@ -47,8 +47,7 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     url: '/chemistry/status',
     views: {
       'box-tab': {
-        templateUrl: 'templates/chemistry/status.html',
-        controller: 'ChemistryNewCtrl'
+        templateUrl: 'templates/chemistry/status.html'
       }
     }
   })
@@ -79,6 +78,16 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
       'box-tab': {
         templateUrl: 'templates/chemistry/result.html',
         controller: 'ChemistryShowCtrl'
+      }
+    }
+  })
+
+  .state('tabs.light-status', {
+    url: '/light/status',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/light/status.html',
+        controller: 'LightStatusCtrl'
       }
     }
   })

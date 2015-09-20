@@ -29,6 +29,13 @@ angular.module('risebox.services')
     return {"RISEBOX-SECRET": secret}
   }
 
+  var getDeviceSettings = function(box_key, box_secret, selected_settings) {
+    return callApi( 'get',
+                    '/api/devices/'+ box_key +'/settings/',
+                    secretHeader(box_secret),
+                    {'mode': 'select', select: selected_settings} )
+  }
+
   //Exposed APIs
   var registerDevice = function(params) {
    return callApi('post', '/api/registration', null, params)
@@ -50,12 +57,17 @@ angular.module('risebox.services')
    return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, secretHeader(box_secret), params)
   }
 
+  var getLightStatus = function(box_key, box_secret) {
+   return getDeviceSettings(box_key, box_secret, 'upper_blue,upper_red,upper_white,lower_blue,lower_red,lower_white');
+  }
+
   return {
     registerDevice: registerDevice,
     login: login,
     getUploadSignature: getUploadSignature,
     analyzeStrip: analyzeStrip,
-    getStripResults: getStripResults
+    getStripResults: getStripResults,
+    getLightStatus: getLightStatus
   };
 
 });
