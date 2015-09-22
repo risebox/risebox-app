@@ -2,12 +2,18 @@
     <h1>Statut</h1>
     <p class="center-text">Voici l'état de la lumière:</p>
     Niveau du haut: <br />
-    bleu {{lightSettings['upper_blue']}}
-    rouge {{lightSettings['upper_red']}}
-    blanc {{lightSettings['upper_white']}}
+    <div class="button-bar">
+      <a class="button button-{{(light['upper'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'grow')">Croissance</a>
+      <a class="button button-{{(light['upper'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'bloom')">Floraison</a>
+      <a class="button button-{{(light['upper'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'chill')">Chill</a>
+    </div>
+    Setting => <strong>{{light['upper']}}</strong>
     <br /><br />
     Niveau du bas: <br />
-    bleu {{lightSettings['lower_blue']}}
-    rouge {{lightSettings['lower_red']}}
-    blanc {{lightSettings['lower_white']}}
+    <div class="button-bar">
+      <a class="button button-{{(light['lower'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'grow')">Croissance</a>
+      <a class="button button-{{(light['lower'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'bloom')">Floraison</a>
+      <a class="button button-{{(light['lower'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'chill')">Chill</a>
+    </div>
+    Setting => <strong>{{light['lower']}}</strong>
 </ion-view>

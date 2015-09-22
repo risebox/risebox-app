@@ -57,8 +57,15 @@ angular.module('risebox.services')
    return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, secretHeader(box_secret), params)
   }
 
-  var getLightStatus = function(box_key, box_secret) {
+  var getLightSettings = function(box_key, box_secret) {
    return getDeviceSettings(box_key, box_secret, 'upper_blue,upper_red,upper_white,lower_blue,lower_red,lower_white');
+  }
+
+  var setLightSettings = function(box_key, box_secret, settings) {
+   return callApi( 'post',
+                   '/api/devices/'+ box_key +'/settings/bulk_update',
+                   secretHeader(box_secret),
+                   {'settings': settings} )
   }
 
   return {
@@ -67,7 +74,8 @@ angular.module('risebox.services')
     getUploadSignature: getUploadSignature,
     analyzeStrip: analyzeStrip,
     getStripResults: getStripResults,
-    getLightStatus: getLightStatus
+    getLightSettings: getLightSettings,
+    setLightSettings: setLightSettings
   };
 
 });
