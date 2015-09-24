@@ -3,7 +3,7 @@ angular.module('risebox.services')
 .factory('Light', function($q, RiseboxObj, RiseboxApi) {
 
   var _settings       = {};
-  var _status         = {};
+  var _config         = {};
 
   var growRedRatio    = 40;
   var growBlueRatio   = 60;
@@ -17,15 +17,25 @@ angular.module('risebox.services')
   var chillBlueRatio  =   0;
   var chillWhiteRatio = 100;
 
-  var getStatus = function () {
+  var darkModeSettingName = 'no_lights_until';
+  var darkModeDuration = 10;
+
+  var addMinutes = function (minutes) {
+    var now = new Date().getTime();
+    return new Date(now + minutes*60000).getTime();
+  }
+
+  var getConfig = function () {
     var q = $q.defer();
 
     RiseboxApi.getLightSettings( RiseboxObj.getInfo().device.key,
                                  RiseboxObj.getInfo().device.token)
               .then(function(result) {
                 cleanSettings(result.result);
-                computeStatus();
-                q.resolve(_status);
+                computeRecipes();
+                console.log('before computeDarkMode')
+                computeDarkMode();
+                q.resolve(_config);
               }, function(err) {
                 console.log("Désolé impossible de récupérer les infos couleur");
                 q.reject(err);
@@ -34,38 +44,55 @@ angular.module('risebox.services')
     return q.promise;
   }
 
-  var setStatus = function (level, status) {
+  var setConfig = function (settings) {
     var q = $q.defer();
 
-    var toUpdateSettings = settingsForStatus(level, status);
     RiseboxApi.setLightSettings( RiseboxObj.getInfo().device.key,
                                  RiseboxObj.getInfo().device.token,
-                                 toUpdateSettings)
+                                 settings)
               .then(function() {
                 q.resolve();
               }, function(err) {
-                console.log("Désolé impossible de mettre à jour les infos couleur");
+                console.log("Désolé impossible de mettre à jour la config de lumière");
                 q.reject(err);
               });
 
     return q.promise;
   }
 
-  var settingsForStatus = function(level, status){
+  var setRecipe = function (level, recipe) {
+    return setConfig(settingsForRecipe(level, recipe));
+  }
+
+  var temporaryOff = function(){
+    var h = {};
+    console.log("before parseFloat");
+    console.log(parseInt(addMinutes(darkModeDuration)));
+    h[darkModeSettingName] = parseInt(addMinutes(darkModeDuration));
+    return setConfig(h);
+  }
+
+  var on = function(){
+    var h = {};
+    h[darkModeSettingName] = null;
+    return setConfig(h);
+  }
+
+  var settingsForRecipe = function(level, recipe){
     var result = {};
-    if (status == 'grow') {
+    if (recipe == 'grow') {
       result[level+'_blue'] = growBlueRatio ;
       result[level+'_red'] = growRedRatio ;
       result[level+'_white'] = growWhiteRatio
     }
     else {
-      if (status == 'bloom') {
+      if (recipe == 'bloom') {
         result[level+'_blue'] = bloomBlueRatio ;
         result[level+'_red'] = bloomRedRatio ;
         result[level+'_white'] = bloomWhiteRatio
       }
       else {
-        if (status == 'chill') {
+        if (recipe == 'chill') {
           result[level+'_blue'] = chillBlueRatio ;
           result[level+'_red'] = chillRedRatio ;
           result[level+'_white'] = chillWhiteRatio
@@ -83,16 +110,16 @@ angular.module('risebox.services')
     _settings = cleanSettings;
   }
 
-  var computeStatus = function() {
-    computeLevelStatus('upper');
-    computeLevelStatus('lower');
+  var computeRecipes = function() {
+    computeLevelRecipe('upper');
+    computeLevelRecipe('lower');
   }
 
-  var computeLevelStatus = function(level) {
-    if (isGrowing(level)) { _status[level] = 'grow'}
-      else { if (isBlooming(level)) { _status[level] = 'bloom' }
-        else { if (isChilling(level)) { _status[level] = 'chill' } else {
-          _status[level] = 'custom'
+  var computeLevelRecipe = function(level) {
+    if (isGrowing(level)) { _config[level + '_recipe'] = 'grow'}
+      else { if (isBlooming(level)) { _config[level + '_recipe'] = 'bloom' }
+        else { if (isChilling(level)) { _config[level + '_recipe'] = 'chill' } else {
+          _config[level + '_recipe'] = 'custom'
         }
       }
     }
@@ -122,10 +149,31 @@ angular.module('risebox.services')
     var h = {}; h[level+'_red'] = chillRedRatio ; h[level+'_blue'] = chillBlueRatio ; h[level+'_white'] = chillWhiteRatio; return h;
   }
 
+  var computeDarkMode = function() {
+    endDate = Date.parse(_settings[darkModeSettingName]);
+    now = new Date();
+    console.log('endDate' + Date.parse(endDate));
+    console.log('now' + now);
+
+    if (endDate == null) {
+      console.log("_config['dark_mode'] wil be false");
+      _config['dark_mode'] = false;
+    } else {
+      if (endDate <= now){
+        console.log("_config['dark_mode'] will be false");
+        _config['dark_mode'] = false;
+      } else {
+        console.log("_config['dark_mode'] will be true");
+        _config['dark_mode'] = true;
+      }
+    }
+  }
+
   return {
-    getStatus: getStatus
-    ,
-    setStatus: setStatus
+    getConfig: getConfig,
+    setRecipe: setRecipe,
+    on: on,
+    temporaryOff: temporaryOff
   }
 })
 

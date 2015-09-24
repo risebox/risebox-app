@@ -2,28 +2,27 @@ angular.module('risebox.controllers')
 
 .controller('LightStatusCtrl', function($ionicPopup, $scope, Light) {
 
-    var statusSuccess = function(result){
+    var configRetrievalSuccess = function(result){
       $scope.light = result;
     }
 
-    var statusError = function(err){
-      console.log("Désolé impossible de récupérer vos résultats")
+    var configRetrievalError = function(err){
+      console.log("Désolé impossible de récupérer la configuration résultats")
     }
 
-    $scope.getLight = function(){
-      Light.getStatus()
+    $scope.getLightConfig = function(){
+      Light.getConfig()
           .then(function(result) {
-            statusSuccess(result);
+            configRetrievalSuccess(result);
           }, function(err) {
-            statusError(err);
+            configRetrievalError(err);
           });
     }
 
-    $scope.setLight = function(level, status){
-      Light.setStatus(level, status)
-          .then(function() {
-            console.log("Lumière " + level + " mise à jour");
-            $scope.getLight();
+    $scope.setLightRecipe = function(level, recipe){
+      Light.setRecipe(level, recipe).then(function() {
+            console.log("Lumière " + level + " mise à jour en " + recipe);
+            $scope.getLightConfig();
           }, function(err) {
             $ionicPopup.alert({
               title: "Eclairage inchangé",
@@ -32,8 +31,37 @@ angular.module('risebox.controllers')
           });
     }
 
+    $scope.switchDarkMode = function(){
+      if ($scope.light['dark_mode'] == true){
+        Light.temporaryOff().then(function() {
+              console.log('lights off for 10 minutes more...');
+              $scope.getLightConfig();
+            }, function(err) {
+              $ionicPopup.alert({
+                title: "Eclairage inchangé",
+                template: "La mise à jour DarkMode n'a pas fonctionné. Retentez plus tard."
+              });
+            });
+      }
+      else {
+        Light.on().then(function() {
+              console.log('lights on');
+              $scope.getLightConfig();
+            }, function(err) {
+              $ionicPopup.alert({
+                title: "Eclairage inchangé",
+                template: "La mise à jour DarkMode n'a pas fonctionné. Retentez plus tard."
+              });
+            });
+      }
+    }
+
+
     //Run when controllers starts
-    $scope.getLight();
+    $scope.getLightConfig();
+    //TODO recupLightConfig every xx sec  on this page to update in case darkMode is back off or settings changed on server.
+
+    $scope.headerSpace = ionic.Platform.isIOS();
 })
 
 ;

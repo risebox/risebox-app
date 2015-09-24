@@ -1,19 +1,71 @@
 <ion-view view-title="La lumière">
-    <h1>Statut</h1>
-    <p class="center-text">Voici l'état de la lumière:</p>
-    Niveau du haut: <br />
-    <div class="button-bar">
-      <a class="button button-{{(light['upper'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'grow')">Croissance</a>
-      <a class="button button-{{(light['upper'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'bloom')">Floraison</a>
-      <a class="button button-{{(light['upper'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLight('upper', 'chill')">Chill</a>
+
+  <div ng-if="headerSpace" style="margin-top: 65px;">
+    &nbsp;
+  </div>
+
+  <div class="list">
+
+    <div class="item item-divider">
+      Couleur
     </div>
-    Setting => <strong>{{light['upper']}}</strong>
-    <br /><br />
-    Niveau du bas: <br />
-    <div class="button-bar">
-      <a class="button button-{{(light['lower'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'grow')">Croissance</a>
-      <a class="button button-{{(light['lower'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'bloom')">Floraison</a>
-      <a class="button button-{{(light['lower'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLight('lower', 'chill')">Chill</a>
+    <div class="item button-bar">
+      <a class="button button-{{(light['upper_recipe'] == 'grow') ? 'positive' : 'stable'}}" ng-click="setLightRecipe('upper', 'grow')">Croissance</a>
+      <a class="button button-{{(light['upper_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('upper', 'bloom')">Floraison</a>
+      <a class="button button-{{(light['upper_recipe'] == 'chill') ? 'light' : 'stable'}}" ng-click="setLightRecipe('upper', 'chill')">Chill</a>
     </div>
-    Setting => <strong>{{light['lower']}}</strong>
+    <div class="item button-bar">
+      <a class="button button-{{(light['lower_recipe'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'grow')">Croissance</a>
+      <a class="button button-{{(light['lower_recipe'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'bloom')">Floraison</a>
+      <a class="button button-{{(light['lower_recipe'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'chill')">Chill</a>
+    </div>
+
+    <div class="item item-divider">
+      Dark mode
+    </div>
+
+    <!-- <a class="item item-icon-left item-icon-right" href="#" ng-click="setLightRecipe('lower', 'bloom')">
+      <i class="icon ion-ios-lightbulb"></i>
+      Eteindre pendant 10 minutes
+      <span class="item-note">
+        10mins
+      </span>
+      <i class="icon ion-ios-clock-outline"></i>
+    </a> -->
+
+    <div class="item item-toggle">
+     Eteindre pendant 10 minutes
+      <form>
+        <label class="toggle toggle-assertive">
+          <input type="checkbox" ng-model="light['dark_mode']" ng-change="switchDarkMode()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </form>
+    </div>
+
+    <div class="item item-divider">
+      Ensoleillement
+    </div>
+    <div></div>
+    <a class="item item-icon-left" href="#" ng-click="setLight('lower', 'bloom')">
+      <i class="icon ion-ios-sunny-outline"></i>
+      Levé du soleil
+      <span class="item-note">
+        9h30
+      </span>
+    </a>
+    <a class="item item-icon-left" href="#" ng-click="setLight('lower', 'bloom')">
+      <i class="icon ion-ios-moon-outline"></i>
+      Couché du soleil
+      <span class="item-note">
+        21h00
+      </span>
+    </a>
+
+  </div>
+
+  <br /><br />
+
 </ion-view>
