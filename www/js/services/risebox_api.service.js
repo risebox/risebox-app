@@ -25,14 +25,14 @@ angular.module('risebox.services')
     return {"RISEBOX-REGISTRATION-TOKEN": token}
   }
 
-  var secretHeader = function(secret){
-    return {"RISEBOX-SECRET": secret}
+  var defaultHeader = function(secret){
+    return {"RISEBOX-SECRET": secret, "RISEBOX-API-CLIENT": 'app'}
   }
 
   var getDeviceSettings = function(box_key, box_secret, selected_settings) {
     return callApi( 'get',
                     '/api/devices/'+ box_key +'/settings/',
-                    secretHeader(box_secret),
+                    defaultHeader(box_secret),
                     {'mode': 'select', select: selected_settings} )
   }
 
@@ -50,11 +50,11 @@ angular.module('risebox.services')
   }
 
   var analyzeStrip = function(box_key, box_secret, params) {
-   return callApi('post', '/api/devices/'+ box_key +'/strips', secretHeader(box_secret), params)
+   return callApi('post', '/api/devices/'+ box_key +'/strips', defaultHeader(box_secret), params)
   }
 
   var getStripResults = function(box_key, box_secret, strip_id, params) {
-   return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, secretHeader(box_secret), params)
+   return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, defaultHeader(box_secret), params)
   }
 
   var getLightSettings = function(box_key, box_secret) {
@@ -64,7 +64,7 @@ angular.module('risebox.services')
   var setLightSettings = function(box_key, box_secret, settings) {
    return callApi( 'post',
                    '/api/devices/'+ box_key +'/settings/bulk_update',
-                   secretHeader(box_secret),
+                   defaultHeader(box_secret),
                    {'settings': settings} )
   }
 
