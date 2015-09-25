@@ -1,6 +1,6 @@
 <ion-view view-title="La lumière">
 
-  <div ng-if="headerSpace" style="margin-top: 65px;">
+  <div style="margin-top: {{(headerSpace == 'big') ? '65px' : '24px'}};">
     &nbsp;
   </div>
 
@@ -10,28 +10,24 @@
       Couleur
     </div>
     <div class="item button-bar">
-      <a class="button button-{{(light['upper_recipe'] == 'grow') ? 'positive' : 'stable'}}" ng-click="setLightRecipe('upper', 'grow')">Croissance</a>
-      <a class="button button-{{(light['upper_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('upper', 'bloom')">Floraison</a>
-      <a class="button button-{{(light['upper_recipe'] == 'chill') ? 'light' : 'stable'}}" ng-click="setLightRecipe('upper', 'chill')">Chill</a>
+      <a class="button button-{{(light['upper_recipe'] == 'grow') ? 'positive' : 'stable'}}" ng-click="setLightRecipe('upper', 'grow')">
+          <i class="icon ion-leaf"></i>&nbsp;Croissance
+      </a>
+      <a class="button button-{{(light['upper_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('upper', 'bloom')">
+          <i class="icon ion-ios-flower-outline"></i>&nbsp;Floraison
+      </a>
     </div>
     <div class="item button-bar">
-      <a class="button button-{{(light['lower_recipe'] == 'grow') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'grow')">Croissance</a>
-      <a class="button button-{{(light['lower_recipe'] == 'bloom') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'bloom')">Floraison</a>
-      <a class="button button-{{(light['lower_recipe'] == 'chill') ? 'energized' : 'balanced'}}" ng-click="setLightRecipe('lower', 'chill')">Chill</a>
+      <a class="button button-{{(light['lower_recipe'] == 'grow') ? 'positive' : 'stable'}}" ng-click="setLightRecipe('lower', 'grow')">    <i class="icon ion-leaf"></i>&nbsp;Croissance
+      </a>
+      <a class="button button-{{(light['lower_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('lower', 'bloom')">
+          <i class="icon ion-ios-flower-outline"></i>&nbsp;Floraison
+      </a>
     </div>
 
     <div class="item item-divider">
       Dark mode
     </div>
-
-    <!-- <a class="item item-icon-left item-icon-right" href="#" ng-click="setLightRecipe('lower', 'bloom')">
-      <i class="icon ion-ios-lightbulb"></i>
-      Eteindre pendant 10 minutes
-      <span class="item-note">
-        10mins
-      </span>
-      <i class="icon ion-ios-clock-outline"></i>
-    </a> -->
 
     <div class="item item-toggle">
      Eteindre pendant 10 minutes

@@ -61,7 +61,7 @@ angular.module('risebox.controllers')
     $scope.getLightConfig();
     //TODO recupLightConfig every xx sec  on this page to update in case darkMode is back off or settings changed on server.
 
-    $scope.headerSpace = ionic.Platform.isIOS();
+    $scope.headerSpace = (ionic.Platform.isIOS() === true ? 'big' : 'small');
 })
 
 ;
