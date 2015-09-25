@@ -33,7 +33,6 @@ angular.module('risebox.services')
               .then(function(result) {
                 cleanSettings(result.result);
                 computeRecipes();
-                console.log('before computeDarkMode')
                 computeDarkMode();
                 q.resolve(_config);
               }, function(err) {
@@ -66,9 +65,7 @@ angular.module('risebox.services')
 
   var temporaryOff = function(){
     var h = {};
-    console.log("before parseFloat");
-    console.log(parseInt(addMinutes(darkModeDuration)));
-    h[darkModeSettingName] = parseInt(addMinutes(darkModeDuration));
+    h[darkModeSettingName] = parseInt(addMinutes(darkModeDuration)/1000); //because server epoch is in seconds not ms
     return setConfig(h);
   }
 
@@ -152,18 +149,12 @@ angular.module('risebox.services')
   var computeDarkMode = function() {
     endDate = Date.parse(_settings[darkModeSettingName]);
     now = new Date();
-    console.log('endDate' + Date.parse(endDate));
-    console.log('now' + now);
-
     if (endDate == null) {
-      console.log("_config['dark_mode'] wil be false");
       _config['dark_mode'] = false;
     } else {
       if (endDate <= now){
-        console.log("_config['dark_mode'] will be false");
         _config['dark_mode'] = false;
       } else {
-        console.log("_config['dark_mode'] will be true");
         _config['dark_mode'] = true;
       }
     }
