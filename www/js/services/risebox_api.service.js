@@ -31,9 +31,16 @@ angular.module('risebox.services')
 
   var getDeviceSettings = function(box_key, box_secret, selected_settings) {
     return callApi( 'get',
-                    '/api/devices/'+ box_key +'/settings/',
+                    '/api/devices/'+ box_key +'/settings?mode=select&select=' + selected_settings,
                     defaultHeader(box_secret),
-                    {'mode': 'select', select: selected_settings} )
+                    null )
+  }
+
+  var setDeviceSettings = function(box_key, box_secret, settings) {
+   return callApi( 'post',
+                   '/api/devices/'+ box_key +'/settings/bulk_update',
+                   defaultHeader(box_secret),
+                   {'settings': settings} )
   }
 
   //Exposed APIs
@@ -62,10 +69,15 @@ angular.module('risebox.services')
   }
 
   var setLightSettings = function(box_key, box_secret, settings) {
-   return callApi( 'post',
-                   '/api/devices/'+ box_key +'/settings/bulk_update',
-                   defaultHeader(box_secret),
-                   {'settings': settings} )
+   return setDeviceSettings(box_key, box_secret, settings);
+  }
+
+  var getPauseSettings = function(box_key, box_secret) {
+   return getDeviceSettings(box_key, box_secret, 'no_lights_until,silent_until');
+  }
+
+  var setPauseSettings = function(box_key, box_secret, settings) {
+   return setDeviceSettings(box_key, box_secret, settings);
   }
 
   return {
@@ -75,7 +87,9 @@ angular.module('risebox.services')
     analyzeStrip: analyzeStrip,
     getStripResults: getStripResults,
     getLightSettings: getLightSettings,
-    setLightSettings: setLightSettings
+    setLightSettings: setLightSettings,
+    getPauseSettings: getPauseSettings,
+    setPauseSettings: setPauseSettings
   };
 
 });

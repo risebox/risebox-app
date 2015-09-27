@@ -17,14 +17,6 @@ angular.module('risebox.services')
   var chillBlueRatio  =   0;
   var chillWhiteRatio = 100;
 
-  var darkModeSettingName = 'no_lights_until';
-  var darkModeDuration = 10;
-
-  var addMinutes = function (minutes) {
-    var now = new Date().getTime();
-    return new Date(now + minutes*60000).getTime();
-  }
-
   var getConfig = function () {
     var q = $q.defer();
 
@@ -33,7 +25,6 @@ angular.module('risebox.services')
               .then(function(result) {
                 cleanSettings(result.result);
                 computeRecipes();
-                computeDarkMode();
                 q.resolve(_config);
               }, function(err) {
                 console.log("Désolé impossible de récupérer les infos couleur");
@@ -61,18 +52,6 @@ angular.module('risebox.services')
 
   var setRecipe = function (level, recipe) {
     return setConfig(settingsForRecipe(level, recipe));
-  }
-
-  var temporaryOff = function(){
-    var h = {};
-    h[darkModeSettingName] = parseInt(addMinutes(darkModeDuration)/1000); //because server epoch is in seconds not ms
-    return setConfig(h);
-  }
-
-  var on = function(){
-    var h = {};
-    h[darkModeSettingName] = null;
-    return setConfig(h);
   }
 
   var settingsForRecipe = function(level, recipe){
@@ -146,25 +125,9 @@ angular.module('risebox.services')
     var h = {}; h[level+'_red'] = chillRedRatio ; h[level+'_blue'] = chillBlueRatio ; h[level+'_white'] = chillWhiteRatio; return h;
   }
 
-  var computeDarkMode = function() {
-    endDate = Date.parse(_settings[darkModeSettingName]);
-    now = new Date();
-    if (endDate == null) {
-      _config['dark_mode'] = false;
-    } else {
-      if (endDate <= now){
-        _config['dark_mode'] = false;
-      } else {
-        _config['dark_mode'] = true;
-      }
-    }
-  }
-
   return {
     getConfig: getConfig,
-    setRecipe: setRecipe,
-    on: on,
-    temporaryOff: temporaryOff
+    setRecipe: setRecipe
   }
 })
 

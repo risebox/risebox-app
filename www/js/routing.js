@@ -82,6 +82,16 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     }
   })
 
+  .state('tabs.pause-status', {
+    url: '/pause/status',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/pause/status.html',
+        controller: 'PauseStatusCtrl'
+      }
+    }
+  })
+
   .state('tabs.light-status', {
     url: '/light/status',
     views: {
