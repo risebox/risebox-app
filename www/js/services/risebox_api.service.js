@@ -65,10 +65,14 @@ angular.module('risebox.services')
   }
 
   var getLightSettings = function(box_key, box_secret) {
-   return getDeviceSettings(box_key, box_secret, 'upper_blue,upper_red,upper_white,lower_blue,lower_red,lower_white');
+   return getDeviceSettings(box_key, box_secret, 'upper_blue,upper_red,upper_white,lower_blue,lower_red,lower_white,day_hours,day_minutes,night_hours,night_minutes');
   }
 
   var setLightSettings = function(box_key, box_secret, settings) {
+   return setDeviceSettings(box_key, box_secret, settings);
+  }
+
+  var setLightSchedules = function(box_key, box_secret, settings) {
    return setDeviceSettings(box_key, box_secret, settings);
   }
 
@@ -89,7 +93,8 @@ angular.module('risebox.services')
     getLightSettings: getLightSettings,
     setLightSettings: setLightSettings,
     getPauseSettings: getPauseSettings,
-    setPauseSettings: setPauseSettings
+    setPauseSettings: setPauseSettings,
+    setLightSchedules: setLightSchedules
   };
 
 });

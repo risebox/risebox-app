@@ -28,23 +28,27 @@
     <div class="item item-divider">
       Ensoleillement
     </div>
-    <div></div>
-    <a class="item item-icon-left" href="#" ng-click="setLight('lower', 'bloom')">
-      <i class="icon ion-ios-sunny-outline"></i>
-      Levé du soleil
-      <span class="item-note">
-        9h30
-      </span>
-    </a>
-    <a class="item item-icon-left" href="#" ng-click="setLight('lower', 'bloom')">
-      <i class="icon ion-ios-moon-outline"></i>
-      Couché du soleil
-      <span class="item-note">
-        21h00
-      </span>
-    </a>
+    <div>
+      <a class="item item-icon-left" ionic-timepicker input-obj="sunrisePickerObject">
+        <i class="icon ion-ios-sunny-outline"></i>
+        Levé du soleil
+        <span class="item-note">
+            <!-- <standard-time-no-meridian etime='sunrisePickerObject.inputEpochTime'></standard-time-meridian> -->
+            {{light['sunrise']['hours'] + 'h' + light['sunrise']['minutes']}}
+        </span>
+      </a>
+    </div>
 
-  </div>
+    <div>
+      <a class="item item-icon-left" ionic-timepicker input-obj="sunsetPickerObject">
+        <i class="icon ion-ios-moon-outline"></i>
+        Couché du soleil
+        <span class="item-note">
+            <!-- <standard-time-no-meridian etime='sunsetPickerObject.inputEpochTime'></standard-time-meridian> -->
+            {{light['sunset']['hours'] + 'h' + light['sunset']['minutes']}}
+        </span>
+      </a>
+    </div>
 
   <br /><br />
 

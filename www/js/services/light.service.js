@@ -25,6 +25,7 @@ angular.module('risebox.services')
               .then(function(result) {
                 cleanSettings(result.result);
                 computeRecipes();
+                computeSchedules();
                 q.resolve(_config);
               }, function(err) {
                 console.log("Désolé impossible de récupérer les infos couleur");
@@ -125,9 +126,33 @@ angular.module('risebox.services')
     var h = {}; h[level+'_red'] = chillRedRatio ; h[level+'_blue'] = chillBlueRatio ; h[level+'_white'] = chillWhiteRatio; return h;
   }
 
+  var settingsForEvent = function(event, hours, minutes) {
+    var h = {};
+    if (event == 'sunrise'){
+      h['day_hours'] = hours;
+      h['day_minutes'] = minutes;
+    } else {
+      if (event == 'sunset'){
+        h['night_hours'] = hours;
+        h['night_minutes'] = minutes;
+      }
+    }
+    return h
+  }
+
+  var setSchedule = function (evt, hour, minutes) {
+    return setConfig(settingsForEvent(evt, hour, minutes));
+  }
+
+  var computeSchedules = function() {
+    _config['sunrise'] = {hours: _settings['day_hours'], minutes: _settings['day_minutes']};
+    _config['sunset']  = {hours: _settings['night_hours'], minutes: _settings['night_minutes']};
+  }
+
   return {
     getConfig: getConfig,
-    setRecipe: setRecipe
+    setRecipe: setRecipe,
+    setSchedule: setSchedule
   }
 })
 
