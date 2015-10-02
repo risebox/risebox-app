@@ -25,13 +25,18 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     url: "/tabs",
     abstract: true,
     templateUrl: "templates/tabs.html",
-    data: { auth: "TokenRequired"}
-    // resolve: {
-    //   AccessControl: 'AccessControl',
-    //   accessGranted: function(AccessControl){
-    //     return AccessControl.perform();
-    //   }
-    // }
+    data: { auth: "TokenRequired"},
+    resolve: {
+      Ac: 'Access',
+      Io: 'Ionic',
+      accessGranted: function(Ac, Io){
+        console.log('Login with API...');
+        Ac.login().then(function(){
+          Io.pushRegister();
+        });
+        // return AccessControl.perform();
+      }
+    }
   })
 
   .state('tabs.box', {

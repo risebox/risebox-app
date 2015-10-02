@@ -13,12 +13,6 @@ angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
       StatusBar.styleLightContent();
     }
 
-    //Ping server and get fresh registration, user and device info
-    Access.login().then(function(){
-      Ionic.pushRegister();
-    });
-
-
     //On every secure page check that that token is present
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
       if ( toState.data && toState.data.auth === 'TokenRequired' ) {
