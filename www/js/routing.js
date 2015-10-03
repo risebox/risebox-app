@@ -9,6 +9,12 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     templateUrl: 'templates/welcome.html'
   })
 
+  .state('offline', {
+    url: '/offline',
+    templateUrl: 'templates/offline.html',
+    controller: 'OfflineCtrl'
+  })
+
   .state('register-device', {
     url: '/register-device',
     templateUrl: 'templates/register-device.html',
@@ -25,18 +31,7 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     url: "/tabs",
     abstract: true,
     templateUrl: "templates/tabs.html",
-    data: { auth: "TokenRequired"},
-    resolve: {
-      Ac: 'Access',
-      Io: 'Ionic',
-      accessGranted: function(Ac, Io){
-        console.log('Login with API...');
-        Ac.login().then(function(){
-          Io.pushRegister();
-        });
-        // return AccessControl.perform();
-      }
-    }
+    data: { auth: "TokenRequired"}
   })
 
   .state('tabs.box', {
