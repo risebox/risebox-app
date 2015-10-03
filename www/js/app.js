@@ -1,6 +1,6 @@
 angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
-.run(function($ionicPlatform, $rootScope, Access, Ionic, RiseboxObj) {
+.run(function($ionicPlatform, $rootScope, $state, App, Access, Ionic, RiseboxObj) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -12,6 +12,24 @@ angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+    App.init(null, function(){
+      $state.go('offline');
+    });
+
+    // listen for Online event
+    $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+      App.init(function(){
+        $state.go('tabs.box');
+      }, function(){
+        $state.go('offline');
+      });
+    })
+
+    // listen for Offline event
+    $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+      $state.go('offline');
+    })
 
     //On every secure page check that that token is present
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
