@@ -7725,6 +7725,6 @@ a.button {
   /*font-weight:bold;*/ }
 
 .slider {
-  background-size: contain;
   width: 100%;
-  height: 90%; }
+  height: 90%;
+  margin: auto; }
