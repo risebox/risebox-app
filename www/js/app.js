@@ -13,7 +13,7 @@ angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
       StatusBar.styleLightContent();
     }
 
-    App.init(null, function(){
+    App.init(function(){}, function(){
       $state.go('offline');
     });
 
