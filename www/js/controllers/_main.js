@@ -1,1 +1,1 @@
-angular.module('risebox.controllers', []);
+angular.module('risebox.controllers', ['ionic-timepicker']);

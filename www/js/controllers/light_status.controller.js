@@ -1,4 +1,4 @@
-angular.module('risebox.controllers', ['ionic-timepicker'])
+angular.module('risebox.controllers')
 
 .controller('LightStatusCtrl', function($ionicPopup, $scope, Light) {
 
