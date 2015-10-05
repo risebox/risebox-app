@@ -38,7 +38,8 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     url: '/box',
     views: {
       'box-tab': {
-        templateUrl: 'templates/box/show.html'
+        templateUrl: 'templates/box/show.html',
+        controller: 'BoxCtrl'
       }
     }
   })
@@ -88,6 +89,16 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
       'box-tab': {
         templateUrl: 'templates/pause/status.html',
         controller: 'PauseStatusCtrl'
+      }
+    }
+  })
+
+  .state('tabs.growbed-status', {
+    url: '/growbed/status',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/growbed/status.html',
+        controller: 'GrowbedStatusCtrl'
       }
     }
   })

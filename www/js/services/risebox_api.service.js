@@ -43,6 +43,16 @@ angular.module('risebox.services')
                    {'settings': settings} )
   }
 
+  var getMetrics = function(box_key, box_secret, metrics) {
+   result =  callApi( 'get',
+                      '/api/devices/'+ box_key +'/metrics',
+                      defaultHeader(box_secret))
+   console.log("result");
+   console.log(result);
+   return result;
+   //TODO: filter metrics (only the one asked and clean results)
+  }
+
   //Exposed APIs
   var registerDevice = function(params) {
    return callApi('post', '/api/registration', null, params)
@@ -51,6 +61,8 @@ angular.module('risebox.services')
   var login = function(params) {
     return callApi('post', '/api/login', tokenHeader(params.token), params)
   }
+
+  //Strips
 
   var getUploadSignature = function(params) {
     return callApi('post', '/sign', null, params)
@@ -63,6 +75,8 @@ angular.module('risebox.services')
   var getStripResults = function(box_key, box_secret, strip_id, params) {
    return callApi('get', '/api/devices/'+ box_key +'/strips/' + strip_id, defaultHeader(box_secret), params)
   }
+
+  //Settings
 
   var getLightSettings = function(box_key, box_secret) {
    return getDeviceSettings(box_key, box_secret, 'upper_blue,upper_red,upper_white,lower_blue,lower_red,lower_white,day_hours,day_minutes,night_hours,night_minutes');
@@ -84,6 +98,13 @@ angular.module('risebox.services')
    return setDeviceSettings(box_key, box_secret, settings);
   }
 
+  //Metrics
+
+  var getGrowbedMetrics = function(box_key, box_secret) {
+   return getMetrics(box_key, box_secret, 'ATEMP,AHUM,UCYC,LCYC');
+  }
+
+
   return {
     registerDevice: registerDevice,
     login: login,
@@ -94,7 +115,8 @@ angular.module('risebox.services')
     setLightSettings: setLightSettings,
     getPauseSettings: getPauseSettings,
     setPauseSettings: setPauseSettings,
-    setLightSchedules: setLightSchedules
+    setLightSchedules: setLightSchedules,
+    getGrowbedMetrics: getGrowbedMetrics
   };
 
 });

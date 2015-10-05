@@ -1,0 +1,83 @@
+<ion-view view-title="Cultures">
+
+  <div style="margin-top: {{(headerSpace == 'big') ? '65px' : '24px'}};">
+    &nbsp;
+  </div>
+
+  <div class="list">
+    <div class="item item-divider">
+      Météo
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-thermometer"></i>
+        Température de l'air
+        <span class="item-note">
+            {{metrics['ATEMP'].value + ' ' + metrics['ATEMP'].unit}}
+            <!-- {{light['sunrise']['hours'] + 'h' + light['sunrise']['minutes']}} -->
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-umbrella"></i>
+        Humidité de l'air
+        <span class="item-note">
+            22%
+        </span>
+      </a>
+    </div>
+
+    <div class="item item-divider">
+      Bac du haut
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-stopwatch-outline"></i>
+        Durée entre marées
+        <span class="item-note">
+            10 mins
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-leaf"></i>
+        Plantations
+        <span class="item-note">
+            Coming soon...
+        </span>
+      </a>
+    </div>
+
+    <div class="item item-divider">
+      Bac du bas
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-ios-stopwatch-outline"></i>
+        Durée entre marées
+        <span class="item-note">
+            13 mins
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-leaf"></i>
+        Plantations
+        <span class="item-note">
+            Coming soon...
+        </span>
+      </a>
+    </div>
+
+  </div>
+
+</ion-view>
