@@ -21,7 +21,7 @@ angular.module('risebox.services')
   var cleanMetrics = function(raw_metrics) {
     var cleanedM = {};
     raw_metrics.forEach(function(metric) {
-      cleanedM[metric.code] = {value: metric.value, unit: metric.unit};
+      cleanedM[metric.code] = {value: metric.value};
     });
     return cleanedM;
   }

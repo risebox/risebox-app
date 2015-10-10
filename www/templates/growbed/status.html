@@ -14,7 +14,7 @@
         <i class="icon ion-thermometer"></i>
         Température de l'air
         <span class="item-note">
-            {{metrics['ATEMP'].value + ' ' + metrics['ATEMP'].unit}}
+            {{metrics['ATEMP'].value}}
             <!-- {{light['sunrise']['hours'] + 'h' + light['sunrise']['minutes']}} -->
         </span>
       </a>
@@ -25,53 +25,47 @@
         <i class="icon ion-umbrella"></i>
         Humidité de l'air
         <span class="item-note">
-            22%
+            {{metrics['AHUM'].value}}
         </span>
       </a>
-    </div>
-
-    <div class="item item-divider">
-      Bac du haut
     </div>
 
     <div>
       <a class="item item-icon-left">
         <i class="icon ion-ios-stopwatch-outline"></i>
-        Durée entre marées
+        Durée entre marées Haut
         <span class="item-note">
-            10 mins
+            {{metrics['UCYC'].value}}
         </span>
       </a>
     </div>
 
     <div>
       <a class="item item-icon-left">
+        Bas
+        <span class="item-note">
+            {{metrics['LCYC'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div class="item item-divider">
+      Plantations
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
         <i class="icon ion-leaf"></i>
-        Plantations
+        Bac du haut
         <span class="item-note">
             Coming soon...
         </span>
       </a>
     </div>
 
-    <div class="item item-divider">
-      Bac du bas
-    </div>
-
     <div>
       <a class="item item-icon-left">
-        <i class="icon ion-ios-stopwatch-outline"></i>
-        Durée entre marées
-        <span class="item-note">
-            13 mins
-        </span>
-      </a>
-    </div>
-
-    <div>
-      <a class="item item-icon-left">
-        <i class="icon ion-leaf"></i>
-        Plantations
+        Bac du bas
         <span class="item-note">
             Coming soon...
         </span>

@@ -47,8 +47,6 @@ angular.module('risebox.services')
    result =  callApi( 'get',
                       '/api/devices/'+ box_key +'/metrics',
                       defaultHeader(box_secret))
-   console.log("result");
-   console.log(result);
    return result;
    //TODO: filter metrics (only the one asked and clean results)
   }
