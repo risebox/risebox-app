@@ -1,0 +1,86 @@
+<ion-view view-title="Aquarium">
+
+  <div style="margin-top: {{(headerSpace == 'big') ? '65px' : '24px'}};">
+    &nbsp;
+  </div>
+
+  <div class="list">
+    <div class="item item-divider">
+      Météo
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon ion-thermometer"></i>
+        Température de l'eau
+        <span class="item-note">
+            {{metrics['WTEMP'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div class="item item-divider">
+      Qualité de l'eau
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon"></i>
+        PH
+        <span class="item-note">
+            {{metrics['PH'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon"></i>
+        Ammoniaque
+        <span class="item-note">
+            {{metrics['NH4'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon"></i>
+        Nitrites
+        <span class="item-note">
+            {{metrics['NO2'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon"></i>
+        Nitrates
+        <span class="item-note">
+            {{metrics['NO3'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item item-icon-left">
+        <i class="icon"></i>
+        Dureté carbonaté
+        <span class="item-note">
+            {{metrics['KH'].value}}
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a class="item" ui-sref="tabs.chemistry-new-test">
+        <button class="button center-block button-balanced">
+          Faire un test maintenant
+        </button>
+      </a>
+    </div>
+
+  </div>
+
+</ion-view>

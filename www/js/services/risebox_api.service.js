@@ -102,6 +102,10 @@ angular.module('risebox.services')
    return getMetrics(box_key, box_secret, 'ATEMP,AHUM,UCYC,LCYC');
   }
 
+  var getTankMetrics = function(box_key, box_secret) {
+   return getMetrics(box_key, box_secret, 'WTEMP,PH,NH4,NO2,NO3,GH,KH');
+  }
+
 
   return {
     registerDevice: registerDevice,
@@ -114,7 +118,8 @@ angular.module('risebox.services')
     getPauseSettings: getPauseSettings,
     setPauseSettings: setPauseSettings,
     setLightSchedules: setLightSchedules,
-    getGrowbedMetrics: getGrowbedMetrics
+    getGrowbedMetrics: getGrowbedMetrics,
+    getTankMetrics: getTankMetrics
   };
 
 });

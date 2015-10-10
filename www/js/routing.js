@@ -113,6 +113,16 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     }
   })
 
+  .state('tabs.tank-status', {
+    url: '/tank/status',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/tank/status.html',
+        controller: 'TankStatusCtrl'
+      }
+    }
+  })
+
   .state('tabs.help', {
     url: '/help',
     views: {
