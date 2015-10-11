@@ -5,6 +5,7 @@
 - [Android Provision](#android_provision)
 - [iOS Provision](#ios_provision)
 - [Push Notifications](#push)
+- [Store publication](#publish)
 
 ##<a name="install"></a> Installation
 0. Prerequisites:
@@ -157,3 +158,29 @@ all*.exclude group: 'com.android.support', module: 'support-v4'
 
 Also don't forget to setup (or change) the push webhook url so that ionic psu service can call the server with the token
 ionic push webhook_url https://rbdev-api.herokuapp.com/api/push_update
+
+##<a name="publish"></a> Publish on stores
+
+### Apple Store
+
+Once app is builded with ```ionic build``` you need to generate a .ipa file to upload to the store.
+
+1. Create an archive
+You need to have Xcode on your local machine
+```
+cd platforms/ios
+
+/usr/bin/xcodebuild archive           \
+    -project RiseboxApp.xcodeproj  \
+    -scheme RiseboxApp              \
+    -archivePath RiseboxApp
+```
+
+2. Generate .ipa
+You now have a .xcarchive generated. Follow these instructions to generate a .ipa
+* First right click on xarchieve file-> show in finder
+* Again right click on xarchieve file-> show package contents
+* Then open folder products->applications, here you get the your application file
+* Now, Drag and drop this one to itunes store's app directory(find apps drop down menu at right top corner of itunes store). This will automatically converts archieve file to ipa file.
+* Then again right click on it and ->show in finder, this will show your ipa file.
+
