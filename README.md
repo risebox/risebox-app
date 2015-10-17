@@ -112,7 +112,7 @@ Simply follow instructions from [Ionic docs](http://docs.ionic.io/docs/push-andr
     * Upload the .certSigningRequest file
     * Download the generated __Apple Development iOS Push Services: co.risebox.app__ .cer certificate and store it in the vault.
   * Now is the time to extract the private key of this certificate
-    * Double click on the __Apple Development iOS Push Services: co.risebox.app__ file
+    * Double click on the __Apple Development iOS Push Services: co.risebox.app__.cer file
     * In Keychain Access, under My Certificates, find the certificate you just added. It should be called Apple Development IOS Push Services.
     * Right Click on it, select Export Apple Development IOS..., and save it as a .p12 file. You will be prompted to enter a password which will be used to protect the exported certificate, do not enter one.
 
@@ -165,7 +165,51 @@ ionic push webhook_url https://rbdev-api.herokuapp.com/api/push_update
 
 Once app is builded with ```ionic build``` you need to generate a .ipa file to upload to the store.
 
-1. Create an archive
+1. Create Adhoc and Production provisionning profiles
+
+0. Create Distribution certificate request CSR (if necessary)
+  * You need to generate a certificate signing request file (CSR). This is used to authenticate the creation of an SSL certificate.
+  * Launch __Keychain Access__ on your Mac
+    * Navigate to __Keychain Access > Certificate Assistant > Request a Certificate From a Certificate Authority__
+    * Enter Name and Email. You can use a team email team@risebox.co and named it accordingly (Risebox Dev Team CSR) (CA Email is not mandatory)
+    * Select __Saved to disk__ and press __continue__. Extension should be .certSigningRequest
+
+1. Create a Distribution Certificate
+  * Log on to [Apple Developer](https://developer.apple.com/membercenter)
+  * Go to __Certificates, Identifiers & Profiles__ and click __Certificates__
+  * Click __+__ to add a Certificate
+    * Choose __App Store and Ad Hoc__
+    * For the CSR either use previously created Distribution CSR for the team located in the vault or generate a new one following the given howto.
+    * Upload the .certSigningRequest file
+    * Download the generated __iOS Distribution: RISEBOX__ .cer certificate and store it in the vault.
+  * Now is the time to extract the private key of this certificate
+    * Double click on the __iOS Distribution: RISEBOX__.cer file
+    * In Keychain Access, under My Certificates, find the certificate you just added. It should be called __iPhone Distribution RISEBOX__.
+    * Right Click on it, select Export Apple Distribution IOS..., and save it as a .p12 file. You will be prompted to enter a password which will be used to protect the exported certificate, do not enter one.
+
+2. Create Distribution (Adhoc and App store) Provisionning profile
+  * Log on to [Apple Developer](https://developer.apple.com/membercenter)
+  * Go to __Certificates, Identifiers & Profiles__ and click __Provisioning Profile__
+  * Choose __Adhoc__
+  * Select your App ID
+  * Select RISEBOX  iOS Distribution certificates you just create earlier
+  * Name it __risebox_app_adhoc_profile__ and click __Generate__
+  * Download it
+
+  * Repeat theses steps for __App Store__ provisionning profile
+
+3. Configure Xcode
+  * Start XCode
+  * In project inspector window, in the __General__ tab and __Identity__ section, select RISEBOX Team
+  * in the __Build Settings__ tab and __Code signing__ section, choose identity __iPhone Distribution (RISEBOX)__
+
+4. Build the project
+```
+ionic build ios --release
+```
+
+5. Create an archive
+
 You need to have Xcode on your local machine
 ```
 cd platforms/ios
@@ -176,7 +220,7 @@ cd platforms/ios
     -archivePath RiseboxApp
 ```
 
-2. Generate .ipa
+6. Generate .ipa
 You now have a .xcarchive generated. Follow these instructions to generate a .ipa
 * First right click on xarchieve file-> show in finder
 * Again right click on xarchieve file-> show package contents
