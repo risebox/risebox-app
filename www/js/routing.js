@@ -127,7 +127,8 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     url: '/help',
     views: {
       'help-tab': {
-        templateUrl: 'templates/help.html'
+        templateUrl: 'templates/help.html',
+        controller: 'SupportCtrl'
       }
     }
   })
