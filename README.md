@@ -228,3 +228,27 @@ You now have a .xcarchive generated. Follow these instructions to generate a .ip
 * Now, Drag and drop this one to itunes store's app directory(find apps drop down menu at right top corner of itunes store). This will automatically converts archieve file to ipa file.
 * Then again right click on it and ->show in finder, this will show your ipa file.
 
+### Android Store
+Follow [Ionic Doc](http://ionicframework.com/docs/guide/publishing.html):
+
+1. Build the app with release flag
+```
+ionic build --release android
+```
+
+2. Generate or retrieve signing private key
+```
+keytool -genkey -v -keystore risebox-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+```
+You have to give a password.
+Once generated the file will be in the vault.
+
+3. Sign jar file and zip it
+```
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore risebox-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name
+
+/Applications/adt-bundle-mac-x86_64-20140702/sdk/build-tools/22.0.1/zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk RiseboxApp.apk
+```
+
+4. Upload APK
+Go to your [Play store](https://play.google.com/apps/publish) and upload signed apk.
