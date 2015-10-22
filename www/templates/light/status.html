@@ -16,12 +16,18 @@
       <a class="button button-{{(light['upper_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('upper', 'bloom')">
           <i class="icon ion-ios-flower-outline"></i>&nbsp;Floraison
       </a>
+      <a class="button button-{{(light['upper_recipe'] == 'chill') ? 'light' : 'stable'}}" ng-click="setLightRecipe('upper', 'chill')">
+          <i class="icon ion-ios-eye-outline"></i>&nbsp;Réel
+      </a>
     </div>
     <div class="item button-bar">
       <a class="button button-{{(light['lower_recipe'] == 'grow') ? 'positive' : 'stable'}}" ng-click="setLightRecipe('lower', 'grow')">    <i class="icon ion-leaf"></i>&nbsp;Croissance
       </a>
       <a class="button button-{{(light['lower_recipe'] == 'bloom') ? 'royal' : 'stable'}}" ng-click="setLightRecipe('lower', 'bloom')">
           <i class="icon ion-ios-flower-outline"></i>&nbsp;Floraison
+      </a>
+      <a class="button button-{{(light['lower_recipe'] == 'chill') ? 'light' : 'stable'}}" ng-click="setLightRecipe('lower', 'chill')">
+          <i class="icon ion-ios-eye-outline"></i>&nbsp;Réel
       </a>
     </div>
 
