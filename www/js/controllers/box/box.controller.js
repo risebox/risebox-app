@@ -46,7 +46,6 @@ angular.module('risebox.controllers')
     //    console.log('You are not sure');
     //  }
    // });
-
   } else {
     console.log('No update available');
   }
