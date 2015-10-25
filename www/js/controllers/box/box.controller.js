@@ -39,13 +39,6 @@ angular.module('risebox.controllers')
       }]
     });
 
-    // confirmPopup.then(function(res) {
-    //  if(res) {
-    //    console.log('You are sure');
-    //  } else {
-    //    console.log('You are not sure');
-    //  }
-   // });
   } else {
     console.log('No update available');
   }

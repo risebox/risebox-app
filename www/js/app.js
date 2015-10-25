@@ -1,6 +1,15 @@
 angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
 .run(function($ionicPlatform, $rootScope, $state, App, Access, Ionic, RiseboxObj) {
+
+  var initApp = function(){
+    App.init(function(){
+      $state.go('tabs.box');
+    }, function(){
+      $state.go('offline');
+    });
+  }
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -13,17 +22,11 @@ angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
       StatusBar.styleLightContent();
     }
 
-    App.init(function(){}, function(){
-      $state.go('offline');
-    });
+    initApp();
 
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-      App.init(function(){
-        $state.go('tabs.box');
-      }, function(){
-        $state.go('offline');
-      });
+      App.start();
     })
 
     // listen for Offline event

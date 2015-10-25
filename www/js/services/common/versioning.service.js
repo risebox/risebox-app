@@ -14,6 +14,7 @@ angular.module('risebox.services')
     console.log('Ionic Deploy: Checking for updates on channel ' + EnvConfig.IONIC_DEPLOY_CHANNEL);
     $ionicDeploy.check().then(function(hasUpdate) {
       updateAvailability = hasUpdate;
+      console.log('Ionic Deploy: updateAvailability is ' + hasUpdate);
       callback(hasUpdate);
     }, function(err) {
       console.error('Ionic Deploy: Unable to check for updates', err);

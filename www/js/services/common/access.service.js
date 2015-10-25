@@ -21,7 +21,6 @@ angular.module('risebox.services')
       RiseboxApi.login({token: RiseboxObj.getToken()})
       .then(function(response) {
         RiseboxObj.setInfo(response.result);
-        $state.go('tabs.box');
         q.resolve();
       }, function(err) {
         $ionicPopup.alert({
