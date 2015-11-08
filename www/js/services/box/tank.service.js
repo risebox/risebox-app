@@ -5,8 +5,8 @@ angular.module('risebox.services')
   var getMetrics = function () {
     var q = $q.defer();
 
-    RiseboxApi.getTankMetrics( RiseboxObj.getInfo().device.key,
-                               RiseboxObj.getInfo().device.token)
+    RiseboxApi.getTankMetrics( RiseboxObj.getToken(),
+                               RiseboxObj.getInfo().devices[0].key)
               .then(function(result) {
                 var m = cleanMetrics(result.result);
                 q.resolve(m);

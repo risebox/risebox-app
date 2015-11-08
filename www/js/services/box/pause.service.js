@@ -25,8 +25,8 @@ angular.module('risebox.services')
   var getConfig = function () {
     var q = $q.defer();
 
-    RiseboxApi.getPauseSettings( RiseboxObj.getInfo().device.key,
-                                 RiseboxObj.getInfo().device.token)
+    RiseboxApi.getPauseSettings( RiseboxObj.getToken(),
+                                 RiseboxObj.getInfo().devices[0].key)
               .then(function(result) {
                 _pauseSettings = computePauseSettings(cleanSettings(result.result));
                 q.resolve(_pauseSettings);
@@ -41,8 +41,8 @@ angular.module('risebox.services')
   var setConfig = function (settings) {
     var q = $q.defer();
 
-    RiseboxApi.setPauseSettings( RiseboxObj.getInfo().device.key,
-                                 RiseboxObj.getInfo().device.token,
+    RiseboxApi.setPauseSettings( RiseboxObj.getToken(),
+                                 RiseboxObj.getInfo().devices[0].key,
                                  settings)
               .then(function() {
                 q.resolve();

@@ -20,8 +20,8 @@ angular.module('risebox.services')
   var getConfig = function () {
     var q = $q.defer();
 
-    RiseboxApi.getLightSettings( RiseboxObj.getInfo().device.key,
-                                 RiseboxObj.getInfo().device.token)
+    RiseboxApi.getLightSettings( RiseboxObj.getToken(),
+                                 RiseboxObj.getInfo().devices[0].key)
               .then(function(result) {
                 cleanSettings(result.result);
                 computeRecipes();
@@ -38,8 +38,8 @@ angular.module('risebox.services')
   var setConfig = function (settings) {
     var q = $q.defer();
 
-    RiseboxApi.setLightSettings( RiseboxObj.getInfo().device.key,
-                                 RiseboxObj.getInfo().device.token,
+    RiseboxApi.setLightSettings( RiseboxObj.getToken(),
+                                 RiseboxObj.getInfo().devices[0].key,
                                  settings)
               .then(function() {
                 q.resolve();

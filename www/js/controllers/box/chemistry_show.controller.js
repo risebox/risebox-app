@@ -9,8 +9,8 @@ angular.module('risebox.controllers')
       console.log("Désolé impossible de récupérer vos résultats")
     }
 
-    RiseboxApi.getStripResults(RiseboxObj.getInfo().device.key,
-                               RiseboxObj.getInfo().device.token,
+    RiseboxApi.getStripResults(RiseboxObj.getToken(),
+                               RiseboxObj.getInfo().devices[0].key,
                                $stateParams.strip_id,
                                $stateParams)
                   .then(function(result) {

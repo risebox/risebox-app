@@ -18,7 +18,7 @@ angular.module('risebox.services')
   var login = function (){
     var q = $q.defer();
     if (token_exists() == true){
-      RiseboxApi.login({token: RiseboxObj.getToken()})
+      RiseboxApi.login(RiseboxObj.getToken(), null)
       .then(function(response) {
         RiseboxObj.setInfo(response.result);
         q.resolve();

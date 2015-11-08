@@ -2,13 +2,12 @@ angular.module('risebox.controllers')
 
 .controller('RegisterDeviceCtrl', function($scope, $state, $ionicPopup, RiseboxApi, RiseboxObj, Ionic) {
 
-  $scope.registerDevice = function(box) {
-    RiseboxApi.registerDevice({"key": box.key, "token": box.token, "origin": ionic.Platform.device()})
+  $scope.registerDevice = function(user) {
+    RiseboxApi.registerDevice(user.email, user.secret, {"origin": ionic.Platform.device()})
                 .then(function(response) {
 
                   RiseboxObj.storeToken(response.result.token);
-                  RiseboxApi.login({token: RiseboxObj.getToken()})
-
+                  RiseboxApi.login(RiseboxObj.getToken(), {"origin": 'some'})
                   .then(function(response) {
 
                     RiseboxObj.setInfo(response.result);

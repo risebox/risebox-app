@@ -143,7 +143,7 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tabs/box');
+  $urlRouterProvider.otherwise('/empty');
 })
 
 ;
