@@ -1,4 +1,5 @@
 {
   "RISEBOX_API_ENDPOINT" : "https://rbapi.herokuapp.com",
-  "IONIC_DEPLOY_CHANNEL" : "production"
+  "IONIC_DEPLOY_CHANNEL" : "production",
+  "STRIP_WAITING_TIME" : "60"
 }

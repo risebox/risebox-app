@@ -2,7 +2,8 @@ angular.module('risebox.config')
 
 .constant('EnvConfig', {
   RISEBOX_API_ENDPOINT: { url: '@@RISEBOX_API_ENDPOINT' },
-  IONIC_DEPLOY_CHANNEL: '@@IONIC_DEPLOY_CHANNEL'
+  IONIC_DEPLOY_CHANNEL: '@@IONIC_DEPLOY_CHANNEL',
+  STRIP_WAITING_TIME: '@@STRIP_WAITING_TIME'
 })
 
 ;
