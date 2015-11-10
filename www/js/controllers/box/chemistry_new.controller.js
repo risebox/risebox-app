@@ -10,7 +10,7 @@ angular.module('risebox.controllers')
         extractStrip(function(){
           uploadAndRunAnalyze(
             function(){
-              testSuccess("Le traitement de l'image est en cours... Vous recevrez une notification lorsque l'analyse sera terminée")
+              testSuccess("Le traitement de l'image est en cours...Vous recevrez une notification lorsque l'analyse sera terminée")
             },
             function(){
               testFail("Vérifier votre connexion réseau et essayez à nouveau")
@@ -30,7 +30,7 @@ angular.module('risebox.controllers')
   var testSuccess = function(text) {
     $ionicLoading.hide();
     $ionicPopup.alert({
-      title: "Votre image est correcte",
+      title: "Belle prise :)",
       template: text
     });
     initStripTest(true);
