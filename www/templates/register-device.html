@@ -19,5 +19,16 @@
         Se connecter
       </button>
     </div>
+    <div class="card" ng-if="hasUpdate">
+      <div class="item item-divider">
+        Votre app n'est plus à jour
+      </div>
+      <div class="item item-text-wrap">
+        <button class="button button-block button-royal" ng-click="updateApp()">
+            Mettre à jour l'app
+        </button>
+      </div>
+    </div>
+    <progress max="100" value="{{progressPct}}" ng-if="showProgress"> </progress>
   </ion-content>
 </ion-view>
