@@ -59,7 +59,7 @@ angular.module('risebox.controllers')
       titleLabel: 'Levé du soleil',  //Optional
       setLabel: 'OK',  //Optional
       closeLabel: 'Fermer',  //Optional
-      setButtonType: 'button-balanced',  //Optional
+      setButtonType: 'button-royal',  //Optional
       closeButtonType: 'button-stable',  //Optional
       callback: function (val) {    //Mandatory
         setLightSchedule("sunrise", val);
@@ -73,7 +73,7 @@ angular.module('risebox.controllers')
       titleLabel: 'Couché du soleil',  //Optional
       setLabel: 'OK',  //Optional
       closeLabel: 'Fermer',  //Optional
-      setButtonType: 'button-balanced',  //Optional
+      setButtonType: 'button-royal',  //Optional
       closeButtonType: 'button-stable',  //Optional
       callback: function (val) {    //Mandatory
         setLightSchedule("sunset", val);
