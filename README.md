@@ -157,7 +157,7 @@ all*.exclude group: 'com.android.support', module: 'support-v4'
 }
 
 Also don't forget to setup (or change) the push webhook url so that ionic psu service can call the server with the token
-ionic push webhook_url https://rbdev-api.herokuapp.com/api/push_update
+ionic push webhook_url https://rbdev-api.herokuapp.com/api/app/push_update
 
 ##<a name="publish"></a> Publish on stores
 
@@ -227,6 +227,9 @@ You now have a .xcarchive generated. Follow these instructions to generate a .ip
 * Then open folder products->applications, here you get the your application file
 * Now, Drag and drop this one to itunes store's app directory(find apps drop down menu at right top corner of itunes store). This will automatically converts archieve file to ipa file.
 * Then again right click on it and ->show in finder, this will show your ipa file.
+
+7. Upload using Application Loader
+
 
 ### Android Store
 Follow [Ionic Doc](http://ionicframework.com/docs/guide/publishing.html):
