@@ -51,6 +51,13 @@ angular.module('risebox.services')
    //TODO: filter metrics (only the one asked and clean results)
   }
 
+  var getMeasures = function(registration_token, box_key, metric_key, params) {
+   result =  callApi( 'get',
+                      '/api/devices/' + box_key + '/metrics/' + metric_key + '/measures?begin_at=' + params['since'],
+                      defaultHeader(registration_token))
+   return result;
+  }
+
   //Exposed APIs
   var registerDevice = function(user_email, user_secret, params) {
    return callApi('post', '/api/app/registration', registrationHeader(user_email, user_secret), params)
@@ -118,7 +125,8 @@ angular.module('risebox.services')
     setPauseSettings: setPauseSettings,
     setLightSchedules: setLightSchedules,
     getGrowbedMetrics: getGrowbedMetrics,
-    getTankMetrics: getTankMetrics
+    getTankMetrics: getTankMetrics,
+    getMeasures: getMeasures
   };
 
 });

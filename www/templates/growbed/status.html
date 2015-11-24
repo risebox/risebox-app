@@ -10,18 +10,17 @@
     </div>
 
     <div>
-      <a class="item item-icon-left">
+      <a class="item item-icon-left" ui-sref="tabs.metric-show({metric_key: 'ATEMP'})">
         <i class="icon ion-thermometer"></i>
         Température de l'air
         <span class="item-note">
             {{metrics['ATEMP'].value}}
-            <!-- {{light['sunrise']['hours'] + 'h' + light['sunrise']['minutes']}} -->
         </span>
       </a>
     </div>
 
     <div>
-      <a class="item item-icon-left">
+      <a class="item item-icon-left" ui-sref="tabs.metric-show({metric_key: 'AHUM'})">
         <i class="icon ion-umbrella"></i>
         Humidité de l'air
         <span class="item-note">
@@ -31,7 +30,7 @@
     </div>
 
     <div>
-      <a class="item item-icon-left">
+      <a class="item item-icon-left" ui-sref="tabs.metric-show({metric_key: 'UCYC'})">
         <i class="icon ion-ios-stopwatch-outline"></i>
         Durée entre marées Haut
         <span class="item-note">
@@ -41,7 +40,7 @@
     </div>
 
     <div>
-      <a class="item item-icon-left">
+      <a class="item item-icon-left" ui-sref="tabs.metric-show({metric_key: 'LCYC'})">
         Bas
         <span class="item-note">
             {{metrics['LCYC'].value}}

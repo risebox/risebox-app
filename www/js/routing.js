@@ -123,6 +123,16 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     }
   })
 
+  .state('tabs.metric-show', {
+    url: '/metric/{metric_key}',
+    views: {
+      'box-tab': {
+        templateUrl: 'templates/metric/show.html',
+        controller: 'MetricShowCtrl'
+      }
+    }
+  })
+
   .state('tabs.help', {
     url: '/help',
     views: {

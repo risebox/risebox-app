@@ -1,0 +1,21 @@
+<ion-view view-title="Suivi {{metric_key}}">
+
+    <div style="margin-top: {{(headerSpace == 'big') ? '65px' : '24px'}};">
+      &nbsp;
+    </div>
+
+    <div id="report" class="col-md-9"></div>
+
+    <div class="item button-bar">
+        <a class="button button-{{(timeFrame == 'hour') ? 'positive' : 'stable'}}" ng-click="refreshData('hour')">
+            <i class="icon"></i>&nbsp;Heure
+        </a>
+        <a class="button button-{{(timeFrame == 'day') ? 'positive' : 'stable'}}" ng-click="refreshData('day')">
+            <i class="icon"></i>&nbsp;Jour
+        </a>
+        <a class="button button-{{(timeFrame == 'week') ? 'positive' : 'stable'}}" ng-click="refreshData('week')">
+            <i class="icon"></i>&nbsp;Semaine
+        </a>
+    </div>
+
+</ion-view>
