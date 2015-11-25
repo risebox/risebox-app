@@ -1,6 +1,6 @@
 angular.module('risebox.controllers')
 
-.controller('MetricShowCtrl', function($scope, $stateParams, $window, RiseboxApi, RiseboxObj) {
+.controller('MetricShowCtrl', function($ionicPopup, $scope, $stateParams, $window, RiseboxApi, RiseboxObj) {
 
     var metricReport = null;
 
@@ -13,9 +13,20 @@ angular.module('risebox.controllers')
       legend      = {"taken_at": "Remonté le", "value": "Valeur mesurée"};
       reportTitle = $scope.reportName;
 
-      metricReport = new MetricReport("#report", $scope.dev_height/2, $scope.dev_width-20, reportTitle);
+      metricReport = new MetricReport("#report", $scope.dev_height/2, $scope.dev_width-20, reportTitle, onGraphPointClick, onGraphPointRelease);
 
       refreshGraphic(result);
+    }
+
+    var onGraphPointClick = function(value, timeStamp){
+      $ionicPopup.alert({
+        title: 'Value selected',
+        template: 'Value: '+ value +'<br/>Timestamp: '+ new Date(timeStamp)
+      });
+    }
+
+    var onGraphPointRelease = function(){
+
     }
 
     var refreshGraphic = function(result){

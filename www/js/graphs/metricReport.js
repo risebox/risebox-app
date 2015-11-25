@@ -1,4 +1,4 @@
-var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
+var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle, onPointClickCB, onPointReleaseCB) {
   var svg = null;
 
   var formatTimeToolTip = d3.time.format("%e %B %H:%M");
@@ -7,7 +7,7 @@ var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
       .attr("class", "tooltip")
       .style("opacity", 0);
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 20},
+  var margin = {top: 20, right: 20, bottom: 50, left: 40},
       width  = maxWidth - margin.left - margin.right,
       height = maxHeight - margin.top - margin.bottom;
 
@@ -35,7 +35,6 @@ var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
   this.display = function(bulkData){
 
     if (svg != null){
-      console.log('removing svg');
       d3.select("#metricSvg").remove();
     }
 
@@ -43,7 +42,6 @@ var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
       .x(function(d) { return x(d.date); })
       .y(function(d) { return y(d.result); });
 
-    console.log('drawing svg');
     svg = d3.select(reportDiv).append("svg")
         .attr("id","metricSvg")
         .attr("width", width + margin.left + margin.right)
@@ -71,10 +69,10 @@ var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
       // Rotate  Axis Ticks
       .selectAll("text")
         .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
+        .attr("dx", "2em")
+        .attr("dy", "1.7em")
         .attr("transform", function(d) {
-            return "rotate(-65)"
+            return "rotate(-25)"
             })
       .append("text")
         .attr("x", width / 2 )
@@ -109,19 +107,18 @@ var MetricReport = function(reportDiv, maxHeight, maxWidth, reportTitle) {
       .attr("cx", function(d) { return x(d.date); })
       .attr("cy", function(d) { return y(d.result); })
       .on("mouseover", function(d) {
-        d3.select(this).attr("r", 7);
-        div.transition()
-          .duration(200)
-          .style("opacity", .9);
-        div.html(formatTimeToolTip(new Date(d.date)) + "<br/>"  + d.result)
-          .style("left", d3.event.pageX + "px")
-          .style("top", (d3.event.pageY + 18) + "px");
+        console.log('toto mouseover');
+        console.log(d);
+        onPointClickCB(d.value, d.date);
       })
       .on("mouseout", function(d) {
-        d3.select(this).attr("r", 5.5);
-          div.transition()
-            .duration(500)
-            .style("opacity", 0);
+        console.log('toto mouseout');
+        console.log(d);
+        onPointReleaseCB(d.value, d.date);
+        // d3.select(this).attr("r", 5.5);
+        //   div.transition()
+        //     .duration(500)
+        //     .style("opacity", 0);
       });
 
     //Title: not displayed
