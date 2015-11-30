@@ -23,11 +23,11 @@
   ```
 
 3. Add Android & IOS platforms
-  ```
+ ```
   cd risebox-app
   ionic platform add ios
   ionic platform add android
-  ```
+ ```
 
 4. Configure risebox-app
   Configure your app with right env variables
@@ -35,14 +35,13 @@
   conf
   # or
   ./tools/config.sh # uses env matching current branch
-
+  ```
 
 4. Build and run risebox-app
   ```
   bu
   # or
   ./tools/build.sh
-
   ```
   This will create the __www/js/config/env-config.js__ with angular constants ued by the app
 
