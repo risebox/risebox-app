@@ -4,7 +4,6 @@ plugins/
 
 */.DS_Store
 .io-config.json
-www/js/config/ionic-config.js
-www.zip
+www/js/config/env-config.js
 
 www.zip
