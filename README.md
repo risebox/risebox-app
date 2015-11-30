@@ -32,6 +32,7 @@
 4. Configure risebox-app
   Configure your app with right env variables
   ```
+  sudo npm install -g gulp
   conf
   # or
   ./tools/config.sh # uses env matching current branch
@@ -43,7 +44,7 @@
   # or
   ./tools/build.sh
   ```
-  This will create the __www/js/config/env-config.js__ with angular constants ued by the app
+  This will create the __www/js/config/env-config.js__ with angular constants used by the app
 
   Then try using Ionic view
   ```
@@ -56,7 +57,7 @@
   ```
   If you don't have iOS simulator available from command line, run this:
   ```
-  npm install -g ios-sim
+  sudo npm install -g ios-sim
   ```
 
 5. Run app
