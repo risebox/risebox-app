@@ -39,7 +39,6 @@
     "commit": "f59bcb63cb91466fb654fdc0f159502c1337fba0"
   },
   "_source": "git://github.com/blueimp/JavaScript-Canvas-to-Blob.git",
-  "_target": "~2.2.0",
-  "_originalSource": "blueimp-canvas-to-blob",
-  "_direct": true
+  "_target": "2.2.0",
+  "_originalSource": "blueimp-canvas-to-blob"
 }

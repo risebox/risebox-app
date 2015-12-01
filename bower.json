@@ -10,6 +10,7 @@
     "d3": "~3.5.9",
     "blueimp-canvas-to-blob": "2.2.0",
     "blueimp-load-image": "1.14.0",
-    "ngCordova": "0.1.19-alpha"
+    "ngCordova": "0.1.19-alpha",
+    "ionic-platform-web-client": "~0.2.1"
   }
 }
