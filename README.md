@@ -21,7 +21,7 @@ Then, follow instructions from [here]( http://cordova.apache.org/docs/en/3.4.0/g
 
   The android sdk is distributed as an 'adt-bundle---' file. On windows, the adt-bundle is packaged with an installer. On OSX and Linux, simply unpack the 'adt-bundle' in the location you store development tools. More detailed information on Android SDK setup can be found [here](http://developer.android.com/sdk/installing/bundle.html)
 
-  - Run ```./tools/android``` and check android __Android SDK Tools__, __Android SDK Platform-tools__ and __Android SDK Build-tools__ as well as the __Android__ required by cordova in order to install them
+  - Run ```./tools/android``` and check __Android SDK Tools__, __Android SDK Platform-tools__ and __Android SDK Build-tools__ as well as the __Android Support Library__ and __Android Support Repository__ and __The latest android SDK (API 23 at this time)__ required by cordova in order to run.
   
   - For Cordova command-line tools to work, you need to include the SDK's tools and platform-tools directories in your PATH environment. On Mac, you can use a text editor to create or modify the __~/.bash_profile__ file, adding a line such as the following, depending on where the SDK installs:
 ```
