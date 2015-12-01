@@ -61,7 +61,7 @@
             "type": "registry",
             "id": "cordova-plugin-file"
         },
-        "is_top_level": true,
+        "is_top_level": false,
         "variables": {}
     },
     "de.appplant.cordova.plugin.local-notification": {
@@ -134,6 +134,14 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-network-information"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-media": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-media"
         },
         "is_top_level": true,
         "variables": {}

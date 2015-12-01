@@ -35,7 +35,10 @@
     "org.apache.cordova.media",
     "cordova-plugin-screen-orientation",
     "ionic-plugin-deploy",
-    "cordova-plugin-network-information"
+    "cordova-plugin-network-information",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.file-transfer"
   ],
   "cordovaPlatforms": [
     "ios",
