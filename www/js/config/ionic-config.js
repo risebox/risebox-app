@@ -13,11 +13,10 @@ angular.module('risebox.config')
 })
 
 .config(['$ionicAppProvider', function($ionicAppProvider) {
-  var settings = new Ionic.IO.Settings();
   $ionicAppProvider.identify({
-    app_id: settings.get('app_id'),
-    api_key: settings.get('api_key'),
-    dev_push: settings.get('dev_push')
+    app_id: "d49a75b8",
+    api_key: "dd893ae489424ab24bd6d0cdcf5dbc4015a8dfd9c6233a96",
+    dev_push: "false"
   });
 }])
 

@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('Ionic', function($rootScope, $ionicUser, $ionicPush, RiseboxObj, Push) {
+.factory('IonicProxy', function($rootScope, $ionicUser, $ionicPush, RiseboxObj, Push) {
 
   var identifyUser = function(extra_metadata) {
     console.log('Ionic User: Identifying with Ionic User service');

@@ -34,7 +34,8 @@
     },
     "org.apache.cordova.media",
     "cordova-plugin-screen-orientation",
-    "ionic-plugin-deploy"
+    "ionic-plugin-deploy",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": [
     "ios",

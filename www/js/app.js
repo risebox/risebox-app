@@ -1,6 +1,6 @@
-angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
+angular.module('risebox', ['ionic','ionic.service.core',  'ionic.service.deploy', 'ionic.service.push',  'ionic.utils', 'ngCordova', 'risebox.config', 'risebox.services', 'risebox.routing', 'risebox.controllers'])
 
-.run(function($ionicPlatform, $rootScope, $state, App, Access, Ionic, RiseboxObj) {
+.run(function($ionicPlatform, $rootScope, $state, App, Access, IonicProxy, RiseboxObj) {
 
   var initApp = function(){
     App.init(function(){
@@ -47,7 +47,7 @@ angular.module('risebox', ['ionic', 'ionic.service.core', 'ionic.service.deploy'
     $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
       console.log('Ionic Push: Got token ', data.token, data.platform);
       RiseboxObj.setPush({platform: data.platform, token: data.token});
-      Ionic.identifyUser({risebox: {registration_token: RiseboxObj.getToken()}});
+      IonicProxy.identifyUser({risebox: {registration_token: RiseboxObj.getToken()}});
     });
 
   });

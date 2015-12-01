@@ -1,6 +1,6 @@
 angular.module('risebox.services')
 
-.factory('App', function(Access, Ionic, $state, $cordovaNetwork, Versioning) {
+.factory('App', function(Access, IonicProxy, $state, $cordovaNetwork, Versioning) {
 
   var init = function(success, error) {
     console.log('Risebox App: Initializing...');
@@ -16,7 +16,7 @@ angular.module('risebox.services')
   var start = function(success, error){
     Access.login().then(function(){
       Versioning.checkForUpdates(function(update){
-        Ionic.pushRegister();
+        IonicProxy.pushRegister();
         success();
       });
     });
