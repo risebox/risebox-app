@@ -34,6 +34,10 @@ angular.module('risebox.services')
     return _info['user']['id'];
   }
 
+  var isAdminUser = function() {
+    return _info['user']['admin'];
+  }
+
   return {
     getInfo: getInfo,
     setInfo: setInfo,
@@ -41,7 +45,8 @@ angular.module('risebox.services')
     storeToken: storeToken,
     setIonicUserId: setIonicUserId,
     setPush: setPush,
-    getRiseboxUserId: getRiseboxUserId
+    getRiseboxUserId: getRiseboxUserId,
+    isAdminUser: isAdminUser
   };
 
 });

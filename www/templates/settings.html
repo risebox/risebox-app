@@ -1,0 +1,24 @@
+<ion-view view-title="Settings">
+    <br/><br/><br/>
+
+    <h1>Paramètres</h1>
+
+    <div class="list">
+        <div class="item item-divider">
+          Risebox Api
+        </div>
+        <div class="item button-bar">
+          <a class="button button-{{(apiEndpoint == 'dev') ? 'positive' : 'stable'}}" ng-click="setApiEndpoint('dev')">
+              <i class="icon ion-bug"></i>&nbsp;Dev
+          </a>
+          <a class="button button-{{(apiEndpoint == 'prod') ? 'positive' : 'stable'}}" ng-click="setApiEndpoint('prod')">
+              <i class="icon ion-ribbon-b"></i>&nbsp;Production
+          </a>
+        </div>
+    </div>
+
+    <button class="button button-block button-royal" ng-click="initApp()">
+        Relancer l'app
+    </button>
+
+</ion-view>

@@ -1,6 +1,6 @@
 angular.module('risebox.controllers')
 
-.controller('BoxCtrl', function($state, $scope, $ionicPopup, Box, Versioning) {
+.controller('BoxCtrl', function($state, $scope, $ionicPopup, Box, Versioning, RiseboxObj) {
 
   if (Versioning.updateAvailable()){
 
@@ -45,6 +45,10 @@ angular.module('risebox.controllers')
 
   var loadBoxStatus = function(){
     // Box.loadAlerts();
+  }
+
+  $scope.canAccessOptions = function(){
+    return RiseboxObj.isAdminUser();
   }
 
   loadBoxStatus();

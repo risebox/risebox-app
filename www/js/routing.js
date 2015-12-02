@@ -27,6 +27,13 @@ angular.module('risebox.routing', ['ionic', 'risebox.services'])
     controller: 'AboutCtrl'
   })
 
+  .state('settings', {
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
+    controller: 'SettingsCtrl',
+    data: { auth: "TokenRequired"}
+  })
+
   .state('tabs', {
     url: "/tabs",
     abstract: true,

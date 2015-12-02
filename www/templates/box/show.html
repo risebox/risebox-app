@@ -4,7 +4,9 @@
         <div class="col">
             <a class="button button-icon icon ion-ios-lightbulb royal center-block round-button" ui-sref="tabs.light-status"></a>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <a class="button button-icon icon ion-gear-a royal center-block round-button" ui-sref="settings" ng-if="canAccessOptions()"></a>
+        </div>
     </div>
     <div class="row" style="padding: 20px">
         <div class="col"></div>
