@@ -1,13 +1,13 @@
 angular.module('risebox.services')
 
-.factory('RiseboxApi', function($http, $q, EnvConfig) {
+.factory('RiseboxApi', function($http, $q, RiseboxConf) {
 
   var callApi = function(verb, url, headers, params) {
     var q = $q.defer();
 
     $http({
       method:  verb,
-      url:     EnvConfig.RISEBOX_API_ENDPOINT.url + url,
+      url:     RiseboxConf.get('RISEBOX_API_ENDPOINT') + url,
       headers: headers,
       data:    params
     })

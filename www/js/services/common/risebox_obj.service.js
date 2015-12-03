@@ -2,7 +2,7 @@ angular.module('risebox.services')
 
 .factory('RiseboxObj', function($localstorage) {
 
-  var _token = $localstorage.get('risebox-registration-token', null)
+  var _token  = $localstorage.get('risebox-registration-token', null)
   var _info  = {}
 
   var getInfo = function(){

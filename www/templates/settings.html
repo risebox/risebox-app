@@ -1,24 +1,33 @@
 <ion-view view-title="Settings">
     <br/><br/><br/>
 
-    <h1>Paramètres</h1>
+    <h1>Configuration</h1>
 
     <div class="list">
         <div class="item item-divider">
-          Risebox Api
+          Environnement
         </div>
         <div class="item button-bar">
-          <a class="button button-{{(apiEndpoint == 'dev') ? 'positive' : 'stable'}}" ng-click="setApiEndpoint('dev')">
+          <a class="button button-{{(env == 'dev') ? 'positive' : 'stable'}}" ng-click="setEnv('dev')">
               <i class="icon ion-bug"></i>&nbsp;Dev
           </a>
-          <a class="button button-{{(apiEndpoint == 'prod') ? 'positive' : 'stable'}}" ng-click="setApiEndpoint('prod')">
+          <a class="button button-{{(env == 'prod') ? 'positive' : 'stable'}}" ng-click="setEnv('prod')">
               <i class="icon ion-ribbon-b"></i>&nbsp;Production
           </a>
         </div>
+        <div class="item">
+            Api Endpoint: {{apiEndpoint}}
+        </div>
+        <div class="item">
+            Wait for strip: {{waitStripTime}} secs
+        </div>
+        <div class="item">
+            Deploy to: {{deployChannel}} channel
+        </div>
     </div>
 
-    <button class="button button-block button-royal" ng-click="initApp()">
-        Relancer l'app
+    <button class="button button-block button-royal" ng-click="saveConfig()">
+        Sauver & Relancer l'app
     </button>
 
 </ion-view>
