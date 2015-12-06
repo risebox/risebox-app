@@ -2,7 +2,7 @@ angular.module('risebox.services')
 
 .factory('Strip', function() {
 
-  var markerWidthRatio        = 0.06688963210702; // ex: 100 (marker width) / 1495 (markerHSpacing)
+  var markerWidthRatio        = 0.1344894595; // ex: 100 (marker width) / 1495 (markerHSpacing)
   var verticalBlankWidthRatio = 0.36454849498328; // ex: 545 (blank h width) / 1495 (markerHSpacing)
   var verticalExtraBlankRatio = 0.18069727891156; // ex: 425 (blank v width) / 2352 (markerVSpacing)
 
