@@ -3,24 +3,28 @@ angular.module('risebox.services')
 .factory('Push', function($cordovaPush, $ionicPopup, $state) {
 
   var notificationReceived = function(message){
-    if (message.event == 'message') {
-      if (message.collapse_key != null) {
-        console.log('Received Android Notification');
-        onNotification(message);
-      } else {
-        console.log('Received Apple Notification');
+    console.log('Push Notification received');
+    console.log(message);
+    switch (ionic.Platform.platform()) {
+      case 'ios':
+        console.log('Received IOS Notification');
         onNotificationAPN(message);
-      }
-    } else {
-      console.log("Message " + message.event + " received : won't do anything, Ionic Push will call webhook");
+      break;
+      case 'android':
+        if (message.event == 'message') {
+          console.log('Received Android Notification');
+          onNotification(message);
+        } else {
+          console.log("Message " + message.event + " received : won't do anything, Ionic Push will call webhook");
+        }
+      break;
     }
   }
 
   var onNotificationAPN = function (e) {
     if (e.alert) {
       // showing an alert also requires the org.apache.cordova.dialogs plugin
-      // navigator.notification.alert(e.alert);
-      handleNotification(e);
+      navigator.notification.alert(e.alert);
     }
 
     if (e.sound) {
@@ -30,8 +34,14 @@ angular.module('risebox.services')
     }
 
     if (e.badge) {
-      pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+      $cordovaPush.setBadgeNumber(e.badge).then(function(result) {
+          console.log('Success !!');
+        }, function(err) {
+          console.log('An error occured');
+        });
     }
+
+    handleNotification(e.foreground, "RiseboxApp", e.body, e.$state, e.$stateParams);
   }
 
   // handle GCM notifications for Android
@@ -50,13 +60,13 @@ angular.module('risebox.services')
         // you might want to play a sound to get the user's attention, throw up a dialog, etc.
         if (e.foreground) {
           // alert('INLINE NOTIFICATION');
-          handleNotification(e);
+          handleNotification(e.foreground, e.payload.title, e.payload.message, e.payload.payload.$state, e.payload.payload.$stateParams);
           // if the notification contains a soundname, play it. playing a sound also requires the org.apache.cordova.media plugin
           var my_media = new Media("/android_asset/www/"+ e.soundname);
           my_media.play();
         }
         else { // otherwise we were launched because the user touched a notification in the notification tray.
-          handleNotification(e);
+          handleNotification(e.foreground, e.payload.title, e.payload.message, e.payload.payload.$state, e.payload.payload.$stateParams);
           // if (e.coldstart)
             // alert('COLDSTART NOTIFICATION');
           // else
@@ -75,15 +85,15 @@ angular.module('risebox.services')
     }
   }
 
-  var handleNotification = function (e) {
-    if (!e.foreground){
+  var handleNotification = function (isForeground, alertTitle, alertMessage, state, params) {
+    if (!isForeground){
       $ionicPopup.alert({
-        title: e.payload.title,
-        template: e.payload.message
+        title: alertTitle,
+        template: alertMessage
       });
     }
 
-    $state.go(e.payload.payload.$state, JSON.parse(e.payload.payload.$stateParams));
+    $state.go(state, JSON.parse(params));
   }
 
   return {
