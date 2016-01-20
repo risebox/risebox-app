@@ -1,11 +1,37 @@
 # risebox-app: Your Risebox mobile assistant
 
 ### Contents
+- [Pre-requisites](#pre)
 - [Installation](#install)
 - [Android Provision](#android_provision)
 - [iOS Provision](#ios_provision)
 - [Push Notifications](#push)
 - [Store publication](#publish)
+
+##<a name="pre"></a> Pre-requisites
+
+0. Android:
+
+Install Java SDK:
+  - On MAC OSX El Capitan, type ```java -version``` on terminal and follow instructions or [go here](the Java downloads page directly here on Oracle.com)
+
+Then, follow instructions from [here]( http://cordova.apache.org/docs/en/3.4.0/guide/platforms/android/index.html#Android%20Platform%20Guide) to install Android SDK
+
+  - Install the Android SDK from developer.android.com/sdk.
+
+  The android sdk is distributed as an 'adt-bundle---' file. On windows, the adt-bundle is packaged with an installer. On OSX and Linux, simply unpack the 'adt-bundle' in the location you store development tools. More detailed information on Android SDK setup can be found [here](http://developer.android.com/sdk/installing/bundle.html)
+
+  - Run ```./tools/android``` and check __Android SDK Tools__, __Android SDK Platform-tools__ and __Android SDK Build-tools__ as well as the __Android Support Library__ and __Android Support Repository__ and __The latest android SDK (API 23 at this time)__ required by cordova in order to run.
+  
+  - For Cordova command-line tools to work, you need to include the SDK's tools and platform-tools directories in your PATH environment. On Mac, you can use a text editor to create or modify the __~/.bash_profile__ file, adding a line such as the following, depending on where the SDK installs:
+```
+export PATH=${PATH}:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools
+```
+
+This exposes SDK tools in newly opened terminal windows. Otherwise run this to make them available in the current session:
+```
+source ~/.bash_profile
+```
 
 ##<a name="install"></a> Installation
 0. Prerequisites:
@@ -23,28 +49,28 @@
   ```
 
 3. Add Android & IOS platforms
-  ```
+ ```
   cd risebox-app
   ionic platform add ios
   ionic platform add android
-  ```
+ ```
 
 4. Configure risebox-app
   Configure your app with right env variables
   ```
+  sudo npm install -g gulp
   conf
   # or
   ./tools/config.sh # uses env matching current branch
-
+  ```
 
 4. Build and run risebox-app
   ```
   bu
   # or
   ./tools/build.sh
-
   ```
-  This will create the __www/js/config/env-config.js__ with angular constants ued by the app
+  This will create the __www/js/config/env-config.js__ with angular constants used by the app
 
   Then try using Ionic view
   ```
@@ -57,7 +83,7 @@
   ```
   If you don't have iOS simulator available from command line, run this:
   ```
-  npm install -g ios-sim
+  sudo npm install -g ios-sim
   ```
 
 5. Run app
