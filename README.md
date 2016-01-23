@@ -247,14 +247,34 @@ cd platforms/ios
 ```
 
 6. Generate .ipa
-You now have a .xcarchive generated. Follow these instructions to generate a .ipa
-* First right click on xarchieve file-> show in finder
-* Again right click on xarchieve file-> show package contents
-* Then open folder products->applications, here you get the your application file
-* Now, Drag and drop this one to itunes store's app directory(find apps drop down menu at right top corner of itunes store). This will automatically converts archieve file to ipa file.
-* Then again right click on it and ->show in finder, this will show your ipa file.
+You now have a .xcarchive generated. Run the following command to generate the .ipa
 
-7. Upload using Application Loader
+```
+xcodebuild -exportArchive -archivePath <arch_path> -exportPath <export_path> -exportOptionsPlist <plist> PROVISIONING_PROFILE=<provisionning_profile_key>
+```
+where:
+ - __arc_path__ is the path to archive (ex: ~/dev/risebox-app/platforms/ios/RiseboxApp.xcarchive)
+ - __export_path__ is the folder where you want the ipa to be generated (ex: /tmp)
+ - __plist__ is path to .plist file (ex: /tmp/info.plist)
+ - __provisionning_profile_key__ is the key of the provisionning profile used to generate the archive. You should find it in the files at ```ls ~/Library/MobileDevice/Provisioning\ Profiles/*```
+
+the .plist file should be contain __method__ and __teamID__ like this:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>method</key>
+	<string>app-store</string>
+	<key>teamID</key>
+	<string>YOUR 10 CHARACTER TEAM ID</string> 
+</dict>
+</plist>
+```
+
+for more info on ipa generation check [here](http://encyclopediaofdaniel.com/blog/xcarchive-to-ipa/) and [here](https://wasin.io/2015/07/archive-and-export-xcode-project-with-command-line/) 
+
+7. Upload .ipa using Application Loader
 
 
 ### Android Store
